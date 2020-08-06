@@ -3,7 +3,9 @@ LIBS = -lsfml-graphics -lsfml-window -lsfml-system
 FLAGS = -g -Wall
 
 OBJ =\
-	game/*.cpp
+	game/*.cpp\
+	game/*/*.cpp
+
 
 all: main
 
