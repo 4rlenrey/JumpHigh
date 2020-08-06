@@ -2,7 +2,7 @@
 
 int main()
 {
-    Window gameWindow;
+    Game gameWindow("JumpHigh", 640, 640);
     gameWindow.keepAlive();
 
     return 0;
