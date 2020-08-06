@@ -1,16 +1,20 @@
 #include <SFML/Graphics.hpp>
-#include "window.h"
+#include "Game.h"
 
-void Game::setVariables(std::string n, int h, int w)
+Game::Game(std::string title, sf::vector2i windowSize)
+  : _title{title}, _windowSize{windowSize}
 {
-  size.x = h;
-  size.y = w;
-  title = n;
+
+}
+
+void Game::start()
+{
+  
 }
 
 void Game::run()
 {
-  sf::RenderWindow window(sf::VideoMode(size.x, size.y), title);
+  
 
   while (window.isOpen())
   {
