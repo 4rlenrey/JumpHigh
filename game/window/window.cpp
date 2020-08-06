@@ -1,9 +1,16 @@
 #include <SFML/Graphics.hpp>
 #include "window.h"
 
-void Window::keepAlive()
+void Game::setVariables(std::string n, int h, int w)
 {
-  sf::RenderWindow window(sf::VideoMode(300, 300), "Working window!");
+  size.x = h;
+  size.y = w;
+  title = n;
+}
+
+void Game::keepAlive()
+{
+  sf::RenderWindow window(sf::VideoMode(size.x, size.y), title);
 
   while (window.isOpen())
   {
