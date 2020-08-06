@@ -1,17 +1,18 @@
 CC = g++
 LIBS = -lsfml-graphics -lsfml-window -lsfml-system
 FLAGS = -g -Wall
+CODE_LOCATION = Code
 
 OBJ =\
-	game/*.cpp\
-	game/*/*.cpp
+	${CODE_LOCATION}/*.cpp\
+	${CODE_LOCATION}/*/*.cpp
 
 
 all: main
 
 clean:
 	@echo Deleting files
-	@rm -f *.o game/*.o game/*/*.o
+	@rm -f *.o ${CODE_LOCATION}/*.o ${CODE_LOCATION}/*/*.o
 
 .c.o:
 	$(CC) -g -c $(INCLUDES) $(FLAGS) $<

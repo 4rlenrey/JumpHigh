@@ -2,8 +2,6 @@
 
 int main()
 {
-    Game game("JumpHigh", sf::Vector2i{800, 600});
+    Game game("JumpHigh", sf::Vector2u{800, 600});
     game.run();
-
-    return 0;
 }
