@@ -11,10 +11,11 @@ all: main
 
 clean:
 	@echo Deleting files
-	@rm -f *.o game/*.o
+	@rm -f *.o game/*.o game/*/*.o
 
 .c.o:
 	$(CC) -g -c $(INCLUDES) $(FLAGS) $<
 
 main: $(OBJ)
 	$(CC) -g $(OBJ) $(LIBS) -pthread -std=c++11  -o JumpHigh
+	make clean
