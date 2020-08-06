@@ -1,24 +1,29 @@
+#ifndef GAME_H
+#define GAME_H
+
 #include <iostream>
 #include <SFML/Graphics.hpp>
-
-#ifndef FUNCT
-#define FUNCT
 
 class Game
 {
   public:
   Game(std::string n, sf::Vector2u windowSize);
-  ~Game();
 
   void start();
   void run();
-  void close();
-
+  void pollEvents();
+  void draw();
+  void update();
+  float deltaTime();
    
   private:
   sf::RenderWindow _window;
-  std::string _title;
   sf::Vector2u _windowSize;
+  std::string _title;
+  sf::Event _event;
+  
+  sf::Clock _timer;
+  sf::Time _frameStartTime;
 };
 
 #endif
