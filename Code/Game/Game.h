@@ -7,7 +7,8 @@
 class Game
 {
   public:
-  Game(std::string n, sf::Vector2i windowSize);
+  Game(std::string n, sf::Vector2u windowSize);
+  ~Game();
 
   void start();
   void run();
@@ -17,7 +18,7 @@ class Game
   private:
   sf::RenderWindow _window;
   std::string _title;
-  sf::Vector2i _windowSize;
+  sf::Vector2u _windowSize;
 };
 
 #endif
