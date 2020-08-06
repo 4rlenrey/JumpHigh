@@ -8,7 +8,7 @@ void Game::setVariables(std::string n, int h, int w)
   title = n;
 }
 
-void Game::keepAlive()
+void Game::run()
 {
   sf::RenderWindow window(sf::VideoMode(size.x, size.y), title);
 

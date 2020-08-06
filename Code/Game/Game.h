@@ -15,7 +15,7 @@ class Game
         setVariables(n, h, w);
     }
     void setVariables(std::string n, int h, int w);
-    void keepAlive();
+    void run();
 };
 
 #endif
