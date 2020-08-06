@@ -4,9 +4,17 @@
 #ifndef FUNCT
 #define FUNCT
 
-class Window
+class Game
 {
+  private:
+    std::string title;
+    sf::Vector2i size;
+
   public:
+    Game(std::string n, int h, int w){
+        setVariables(n, h, w);
+    }
+    void setVariables(std::string n, int h, int w);
     void keepAlive();
 };
 
