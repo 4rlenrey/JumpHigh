@@ -2,7 +2,7 @@
 #define PLAYER_H
 
 #include <SFML/Graphics.hpp>
-#include "Physics/Physical.h"
+#include <Physics/Physical.h>
 
 class Player : public Physical
 {

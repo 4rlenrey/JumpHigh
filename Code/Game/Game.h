@@ -6,16 +6,18 @@
 
 class Game
 {
-  private:
-    std::string title;
-    sf::Vector2i size;
-
   public:
-    Game(std::string n, int h, int w){
-        setVariables(n, h, w);
-    }
-    void setVariables(std::string n, int h, int w);
-    void run();
+  Game(std::string n, sf::Vector2i windowSize);
+
+  void start();
+  void run();
+  void close();
+
+   
+  private:
+  sf::RenderWindow _window;
+  std::string _title;
+  sf::Vector2i _windowSize;
 };
 
 #endif
