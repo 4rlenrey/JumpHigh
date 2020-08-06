@@ -1,9 +1,9 @@
-#include "window/window.h"
+#include "Game/Game.h"
 
 int main()
 {
-    Game gameWindow("JumpHigh", 640, 640);
-    gameWindow.keepAlive();
+    Game game("JumpHigh", 640, 640);
+    game.run();
 
     return 0;
 }
