@@ -2,16 +2,14 @@
 #define PLAYER_H
 
 #include <SFML/Graphics.hpp>
+#include "Physics/Physical.h"
 
-class Player
+class Player : public Physical
 {
     public:
 
     void update();
     void jump();
-    
-    private:
-    sf::Vector2f pos;
 };
 
 #endif
