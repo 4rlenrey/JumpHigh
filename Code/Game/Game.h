@@ -9,7 +9,8 @@ class Game
 {
   public:
   static sf::Clock _timer;
-  static float deltaTime();
+  static float _deltaTime;
+  static void deltaTime();
 
   Game(std::string n, sf::Vector2u windowSize);
 
