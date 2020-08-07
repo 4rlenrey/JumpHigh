@@ -3,10 +3,14 @@
 
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include "Player/Player.h"
 
 class Game
 {
   public:
+  static sf::Clock _timer;
+  static float deltaTime();
+
   Game(std::string n, sf::Vector2u windowSize);
 
   void start();
@@ -14,7 +18,7 @@ class Game
   void pollEvents();
   void draw();
   void update();
-  float deltaTime();
+
    
   private:
   sf::RenderWindow _window;
@@ -22,8 +26,10 @@ class Game
   std::string _title;
   sf::Event _event;
   
-  sf::Clock _timer;
-  sf::Time _frameStartTime;
+  
+
+  Player _player;
+
 };
 
 #endif

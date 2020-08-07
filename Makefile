@@ -2,6 +2,7 @@ CC = g++
 LIBS = -lsfml-graphics -lsfml-window -lsfml-system
 FLAGS = -g -Wall
 CODE_LOCATION = Code
+INCLUDES = -I Code/
 
 OBJ =\
 	${CODE_LOCATION}/*.cpp\
@@ -18,5 +19,5 @@ clean:
 	$(CC) -g -c $(INCLUDES) $(FLAGS) $<
 
 main: $(OBJ)
-	$(CC) -g $(OBJ) $(LIBS) -pthread -std=c++11  -o JumpHigh
+	$(CC) -g $(OBJ) $(LIBS) $(INCLUDES) -pthread -std=c++11  -o JumpHigh
 	make clean
