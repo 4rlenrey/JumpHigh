@@ -15,12 +15,12 @@ void Physical::applyForce(sf::Vector2f force)
 
 void Physical::updateAcceleration()
 {
-    _acceleration = (_force/_mass) * 1000.0f;
+    _acceleration = (_force/_mass) * 10000.0f;
 }
 
 void Physical::updateVelocity(float deltaTime)
 {   
-    _velocity += _acceleration * ((deltaTime * deltaTime) / 2.0f); 
+    _velocity += _acceleration * deltaTime; 
 }
 
 void Physical::updatePosition(float deltaTime)
