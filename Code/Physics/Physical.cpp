@@ -2,7 +2,11 @@
 #include "VectorFunctions/VectorFunctions.h"
 #include <iostream>
 
-Physical::Physical(float mass = 1.0f)
+
+const float Physical::DEFAULT_MASS = 1.0f;
+const float Physical::ACCELERATION_SCALE = 10000.0f; 
+
+Physical::Physical(float mass = DEFAULT_MASS)
     : _mass{mass}
 {
     //nothing yet
@@ -15,7 +19,7 @@ void Physical::applyForce(sf::Vector2f force)
 
 void Physical::updateAcceleration()
 {
-    _acceleration = (_force/_mass) * 10000.0f;
+    _acceleration = (_force/_mass) * ACCELERATION_SCALE;
 }
 
 void Physical::updateVelocity(float deltaTime)
