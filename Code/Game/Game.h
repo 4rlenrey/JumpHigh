@@ -23,8 +23,8 @@ class Game
    
   private:
   sf::RenderWindow _window;
-  sf::Vector2u _windowSize;
   std::string _title;
+  sf::Vector2u _windowSize;
   sf::Event _event;
   
   
