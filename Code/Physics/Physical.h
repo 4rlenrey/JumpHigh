@@ -8,7 +8,11 @@ class Physical
 {
     friend std::ostream& operator<<(std::ostream& out, const Physical& obj);
 
+
     public:
+    static const float DEFAULT_MASS;
+    static const float ACCELERATION_SCALE;
+
     Physical(float mass);
     void applyForce(sf::Vector2f force);
     void update(float deltaTime);
