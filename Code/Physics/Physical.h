@@ -9,8 +9,10 @@ class Physical
     friend std::ostream& operator<<(std::ostream& out, const Physical& obj);
 
     public:
-    static const float DEFAULT_MASS;
-    static const float ACCELERATION_SCALE;
+    static const float DEFAULT_MASS;                    //mass applied to object in default constructor when no argument is passed
+    static const float ACCELERATION_SCALE;              //scale to adjust final acceleration
+    static const float GENERAL_FRICTION_FORCE_VALUE;    //value of force opossite to velocity of object 
+    static const float MIN_SPEED_THRESHOLD;             //minimal value of speed to stop object's motion
 
     Physical(float mass = DEFAULT_MASS);
     void applyForce(sf::Vector2f force);

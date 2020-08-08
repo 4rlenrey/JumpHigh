@@ -1,7 +1,7 @@
 #include "Player/Player.h"
 #include "VectorFunctions/VectorFunctions.h"
 
-const float Player::MAX_VELOCITY = 2.0f;
+const float Player::MAX_VELOCITY = 500.0f;
 const float Player::RECTANGLE_SIZE = 20.0f;
 
 Player::Player()
