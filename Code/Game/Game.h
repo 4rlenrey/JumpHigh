@@ -2,17 +2,22 @@
 #define GAME_H
 
 #include <iostream>
+#include <string>
 #include <SFML/Graphics.hpp>
 #include "Player/Player.h"
 
 class Game
 {
   public:
+  static const std::string TITLE;
+  static const sf::Vector2u DEFAULT_WINDOW_SIZE;
+
   static sf::Clock _timer;
   static float _deltaTime;
   static void deltaTime();
+  
 
-  Game(std::string n, sf::Vector2u windowSize);
+  Game(std::string title = TITLE, sf::Vector2u windowSize = DEFAULT_WINDOW_SIZE);
 
   void start();
   void run();
