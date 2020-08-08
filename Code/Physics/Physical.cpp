@@ -6,7 +6,7 @@
 const float Physical::DEFAULT_MASS = 1.0f;
 const float Physical::ACCELERATION_SCALE = 10000.0f; 
 
-Physical::Physical(float mass = DEFAULT_MASS)
+Physical::Physical(float mass)
     : _mass{mass}
 {
     //nothing yet
