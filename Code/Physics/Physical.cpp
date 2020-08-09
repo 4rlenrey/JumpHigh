@@ -2,30 +2,46 @@
 #include "VectorFunctions/VectorFunctions.h"
 #include <iostream>
 
-Physical::Physical(float mass = 1.0f)
-    : _mass{mass}
+
+const float Physical::DEFAULT_MASS = 1.0f;
+const float Physical::ACCELERATION_SCALE = 1000.0f; 
+const float Physical::GENERAL_FRICTION_FORCE_VALUE = 0.5f;
+const float Physical::MIN_SPEED_THRESHOLD = 1e-6;
+const sf::Vector2f Physical::GRAVITY_FORCE = sf::Vector2f{0.0f, 1.0f};
+
+Physical::Physical(float mass)
+    : _mass{mass}, _decelerationValue{(GENERAL_FRICTION_FORCE_VALUE / _mass) * ACCELERATION_SCALE}
 {
-    //nothing yet
 }
 
 void Physical::applyForce(sf::Vector2f force)
 {
-    _force = force;
+    _force = force + GRAVITY_FORCE; 
 }
 
 void Physical::updateAcceleration()
 {
-    _acceleration = (_force/_mass) * 10000.0f;
+    _acceleration = (_force/_mass) * ACCELERATION_SCALE;
 }
 
 void Physical::updateVelocity(float deltaTime)
 {   
-    _velocity += _acceleration * deltaTime; 
+    _velocity += _acceleration * deltaTime;
+
+    if(_velocity.x < MIN_SPEED_THRESHOLD)
+    {
+        _velocity.x = 0.0f; //stop object's horizontal movement (no sliding)
+    }
+    
+    if(length(_velocity))
+    {
+        _velocity -= normalized(_velocity) * _decelerationValue * deltaTime;  //slow down object when moving
+    }
+
 }
 
 void Physical::updatePosition(float deltaTime)
 {
-    //std::cout << deltaTime << std::endl;
     _position += _velocity * deltaTime;
 }
 
@@ -34,6 +50,26 @@ void Physical::update(float deltaTime)
     updateAcceleration();
     updateVelocity(deltaTime);
     updatePosition(deltaTime);
+}
+
+float Physical::getMass() const
+{
+    return _mass;
+}
+
+const sf::Vector2f& Physical::getPosition() const
+{
+    return _position;
+}
+
+const sf::Vector2f& Physical::getVelocity() const
+{
+    return _velocity;
+}
+
+void Physical::setVelocity(sf::Vector2f&& vec)
+{
+    _velocity = vec;
 }
 
 std::ostream& operator<<(std::ostream& out, const Physical& obj)
@@ -45,3 +81,4 @@ std::ostream& operator<<(std::ostream& out, const Physical& obj)
 
     return out;
 }
+
