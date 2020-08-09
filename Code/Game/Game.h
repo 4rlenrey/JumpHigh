@@ -35,7 +35,6 @@ class Game
 
 
   Player _player;
-  Player _player2;
 
 };
 
