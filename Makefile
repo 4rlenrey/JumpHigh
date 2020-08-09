@@ -1,13 +1,12 @@
 CC = g++
-LIBS = -lsfml-graphics -lsfml-window -lsfml-system
+LIBS = -lsfml-graphics -lsfml-window -lsfml-system -lm
 FLAGS = -g -Wall
 CODE_LOCATION = Code
 INCLUDES = -I Code/
 
-OBJ =\
+CPP =\
 	${CODE_LOCATION}/*.cpp\
 	${CODE_LOCATION}/*/*.cpp
-
 
 all: main
 
@@ -15,9 +14,9 @@ clean:
 	@echo Deleting files
 	@rm -f *.o ${CODE_LOCATION}/*.o ${CODE_LOCATION}/*/*.o
 
-.c.o:
-	$(CC) -g -c $(INCLUDES) $(FLAGS) $<
+compile:
+	$(CC) -g -c $(CPP) $(INCLUDES) $(FLAGS) $<
 
-main: $(OBJ)
-	$(CC) -g $(OBJ) $(LIBS) $(INCLUDES) -pthread -std=c++11  -o JumpHigh
+main: $(CPP)
+	$(CC) -g $(CPP) $(LIBS) $(INCLUDES) -pthread -std=c++11  -o JumpHigh
 	make clean

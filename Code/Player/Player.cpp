@@ -1,7 +1,11 @@
 #include "Player/Player.h"
+#include "VectorFunctions/VectorFunctions.h"
+
+const float Player::MAX_VELOCITY = 500.0f;
+const float Player::RECTANGLE_SIZE = 20.0f;
 
 Player::Player()
-    : Physical{20}, _rec{sf::RectangleShape{sf::Vector2f{20,20}}}
+    : _rec{sf::RectangleShape{sf::Vector2f{RECTANGLE_SIZE, RECTANGLE_SIZE}}}
 {
     _rec.setFillColor(sf::Color::White);
 }
@@ -22,5 +26,15 @@ void Player::update(float deltaTime)
     }
 
     Physical::update(deltaTime);
-    _rec.setPosition(_position);
+    _rec.setPosition(getPosition());
+}
+
+void Player::updateVelocity(float deltaTime)
+{
+    Physical::updateVelocity(deltaTime);
+    
+    if(length(getVelocity()) >= MAX_VELOCITY)
+    {   
+        setVelocity(normalized(getVelocity()) * MAX_VELOCITY); //setting velocity to max speed
+    }
 }

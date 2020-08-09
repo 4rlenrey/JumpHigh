@@ -2,6 +2,9 @@
 #include "Game/Game.h"
 #include "VectorFunctions/VectorFunctions.h"
 
+const std::string Game::TITLE = "JumpHigh";
+const sf::Vector2u Game::DEFAULT_WINDOW_SIZE = sf::Vector2u{1280, 720};
+
 sf::Clock Game::_timer{};
 float Game::_deltaTime{};
 void Game::deltaTime()
@@ -50,12 +53,13 @@ void Game::update()
 
 void Game::run()
 {
+  
   while (_window.isOpen())
   {
     pollEvents();
 
     update();
     draw();
-    //std::cout << "FPS: " << 1.0 / _timer.getElapsedTime().asSeconds();
+    
   }
 }
