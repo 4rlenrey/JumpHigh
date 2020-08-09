@@ -7,16 +7,16 @@ const float Physical::DEFAULT_MASS = 1.0f;
 const float Physical::ACCELERATION_SCALE = 1000.0f; 
 const float Physical::GENERAL_FRICTION_FORCE_VALUE = 0.5f;
 const float Physical::MIN_SPEED_THRESHOLD = 1e-6;
+const sf::Vector2f Physical::GRAVITY_FORCE = sf::Vector2f{0.0f, 1.0f};
 
 Physical::Physical(float mass)
-    : _mass{mass}
+    : _mass{mass}, _decelerationValue{(GENERAL_FRICTION_FORCE_VALUE / _mass) * ACCELERATION_SCALE}
 {
-    //nothing yet
 }
 
 void Physical::applyForce(sf::Vector2f force)
 {
-    _force = force;
+    _force = force + GRAVITY_FORCE; 
 }
 
 void Physical::updateAcceleration()
@@ -28,23 +28,20 @@ void Physical::updateVelocity(float deltaTime)
 {   
     _velocity += _acceleration * deltaTime;
 
-    if(length(_velocity) < MIN_SPEED_THRESHOLD)
+    if(_velocity.x < MIN_SPEED_THRESHOLD)
     {
-        //stop object
-        _velocity = sf::Vector2f{}; 
+        _velocity.x = 0.0f; //stop object's horizontal movement (no sliding)
     }
-    else
+    
+    if(length(_velocity))
     {
-        //slow down object 
-        float deceleration = (GENERAL_FRICTION_FORCE_VALUE / _mass) * ACCELERATION_SCALE;
-        _velocity -= normalized(_velocity) * deceleration * deltaTime;
+        _velocity -= normalized(_velocity) * _decelerationValue * deltaTime;  //slow down object when moving
     }
 
 }
 
 void Physical::updatePosition(float deltaTime)
 {
-    //std::cout << deltaTime << std::endl;
     _position += _velocity * deltaTime;
 }
 
@@ -53,6 +50,26 @@ void Physical::update(float deltaTime)
     updateAcceleration();
     updateVelocity(deltaTime);
     updatePosition(deltaTime);
+}
+
+float Physical::getMass() const
+{
+    return _mass;
+}
+
+const sf::Vector2f& Physical::getPosition() const
+{
+    return _position;
+}
+
+const sf::Vector2f& Physical::getVelocity() const
+{
+    return _velocity;
+}
+
+void Physical::setVelocity(sf::Vector2f&& vec)
+{
+    _velocity = vec;
 }
 
 std::ostream& operator<<(std::ostream& out, const Physical& obj)
@@ -64,3 +81,4 @@ std::ostream& operator<<(std::ostream& out, const Physical& obj)
 
     return out;
 }
+
