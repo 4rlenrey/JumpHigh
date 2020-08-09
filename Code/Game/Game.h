@@ -15,7 +15,7 @@ class Game
   static sf::Clock _timer;
   static float _deltaTime;
   static void deltaTime();
-  
+
 
   Game(std::string title = TITLE, sf::Vector2u windowSize = DEFAULT_WINDOW_SIZE);
 
@@ -25,23 +25,24 @@ class Game
   void draw();
   void update();
 
-   
+
   private:
   sf::RenderWindow _window;
   std::string _title;
   sf::Vector2u _windowSize;
   sf::Event _event;
-  
-  
+
+
 
   Player _player;
+  Player _player2;
 
 };
 
 class FpsCounter
 {
   public:
-  
+
   private:
   int count;
 };
