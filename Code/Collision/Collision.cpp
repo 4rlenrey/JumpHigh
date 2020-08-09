@@ -22,7 +22,6 @@ bool checkCollision(sf::RectangleShape Obj1, sf::RectangleShape Obj2)
     (_hitbox1.Position.y + _hitbox1.Size.y) > _hitbox2.Position.y
     )
       {
-         std::cout << "Collision detected!" << '\n';
         return true;
       }
 

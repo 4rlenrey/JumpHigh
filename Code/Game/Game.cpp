@@ -41,7 +41,6 @@ void Game::draw()
   _window.clear();
 
   _window.draw(_player._rec);
-  _window.draw(_player2._rec);
 
   _window.display();
 }
@@ -49,9 +48,7 @@ void Game::draw()
 void Game::update()
 {
   Game::deltaTime();
-  if(!checkCollision(_player._rec, _player2._rec))
-    _player.update(_deltaTime);
-  _player2._rec.setPosition(19, 200);  
+  _player.update(_deltaTime);
   _timer.restart();
 }
 
