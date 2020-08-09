@@ -38,4 +38,12 @@ class Game
 
 };
 
+class FpsCounter
+{
+  public:
+  
+  private:
+  int count;
+};
+
 #endif

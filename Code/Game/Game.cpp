@@ -53,12 +53,13 @@ void Game::update()
 
 void Game::run()
 {
+  
   while (_window.isOpen())
   {
     pollEvents();
 
     update();
     draw();
-    //std::cout << "FPS: " << 1.0 / _timer.getElapsedTime().asSeconds();
+    
   }
 }

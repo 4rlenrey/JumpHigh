@@ -26,16 +26,15 @@ void Player::update(float deltaTime)
     }
 
     Physical::update(deltaTime);
-    _rec.setPosition(_position);
+    _rec.setPosition(getPosition());
 }
 
 void Player::updateVelocity(float deltaTime)
 {
-    //Player has to have limit of speed
     Physical::updateVelocity(deltaTime);
     
-    if(length(_velocity) > MAX_VELOCITY)
-    {
-        _velocity = normalized(_velocity) * MAX_VELOCITY;
+    if(length(getVelocity()) >= MAX_VELOCITY)
+    {   
+        setVelocity(normalized(getVelocity()) * MAX_VELOCITY); //setting velocity to max speed
     }
 }
