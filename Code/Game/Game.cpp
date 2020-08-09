@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include "Game/Game.h"
 #include "VectorFunctions/VectorFunctions.h"
+#include "Collision/Collision.h"
 
 const std::string Game::TITLE = "JumpHigh";
 const sf::Vector2u Game::DEFAULT_WINDOW_SIZE = sf::Vector2u{1280, 720};
@@ -40,6 +41,7 @@ void Game::draw()
   _window.clear();
 
   _window.draw(_player._rec);
+  _window.draw(_player2._rec);
 
   _window.display();
 }
@@ -47,19 +49,21 @@ void Game::draw()
 void Game::update()
 {
   Game::deltaTime();
-  _player.update(_deltaTime);
+  if(!checkCollision(_player._rec, _player2._rec))
+    _player.update(_deltaTime);
+  _player2._rec.setPosition(19, 200);  
   _timer.restart();
 }
 
 void Game::run()
 {
-  
+
   while (_window.isOpen())
   {
     pollEvents();
 
     update();
     draw();
-    
+
   }
 }
