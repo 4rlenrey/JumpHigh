@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include "Game/Game.h"
 #include "VectorFunctions/VectorFunctions.h"
+#include "Collision/Collision.h"
 
 const std::string Game::TITLE = "JumpHigh";
 const sf::Vector2u Game::DEFAULT_WINDOW_SIZE = sf::Vector2u{1280, 720};
@@ -53,13 +54,13 @@ void Game::update()
 
 void Game::run()
 {
-  
+
   while (_window.isOpen())
   {
     pollEvents();
 
     update();
     draw();
-    
+
   }
 }
