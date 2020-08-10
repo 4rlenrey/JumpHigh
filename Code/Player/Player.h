@@ -19,7 +19,7 @@ class Player : public Physical
 
     private:
     void updateVelocity(float deltaTime) override;
-    
+    bool jumping;
 };
 
 #endif

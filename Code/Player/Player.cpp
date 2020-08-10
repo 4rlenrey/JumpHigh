@@ -25,16 +25,42 @@ void Player::update(float deltaTime)
         applyForce(sf::Vector2f{0.0f, 0.0f});
     }
 
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+    {
+        jump();
+        jumping = true;
+    }
+    else
+    {
+        jumping = false;
+    }
+
     Physical::update(deltaTime);
     _rec.setPosition(getPosition());
+}
+
+void Player::jump()
+{
+    setVelocity(sf::Vector2f{getVelocity().x, -1000.0f});
 }
 
 void Player::updateVelocity(float deltaTime)
 {
     Physical::updateVelocity(deltaTime);
     
-    if(length(getVelocity()) >= MAX_VELOCITY)
+    if(std::abs(getVelocity().x) >= MAX_VELOCITY)
     {   
-        setVelocity(normalized(getVelocity()) * MAX_VELOCITY); //setting velocity to max speed
+        if(getVelocity().x > 0.0f)
+        {
+            setVelocity(sf::Vector2f{MAX_VELOCITY, getVelocity().y}); //setting velocity to max speed
+        }
+        else
+        {
+            setVelocity(sf::Vector2f{-MAX_VELOCITY, getVelocity().y}); //setting velocity to max speed
+        }
+    }
+    if(getPosition().y >= 600 && !jumping)
+    {
+        setVelocity(sf::Vector2f{getVelocity().x, 0.0f});
     }
 }
