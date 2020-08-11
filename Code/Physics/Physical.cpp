@@ -46,6 +46,7 @@ void Physical::updatePosition(float deltaTime)
 
 void Physical::update(float deltaTime)
 {
+    GameObject::update(deltaTime);
     updateAcceleration();
     updateVelocity(deltaTime);
     updatePosition(deltaTime);
@@ -66,6 +67,10 @@ const sf::Vector2f& Physical::getVelocity() const
     return _velocity;
 }
 
+void Physical::setMass(float mass)
+{
+    _mass = mass;
+}
 void Physical::setVelocity(sf::Vector2f&& vec)
 {
     _velocity = vec;

@@ -12,10 +12,8 @@ class Player : public Physical
     
     Player();
 
-    void update(float deltaTime);
+    void update(float deltaTime) override;
     void jump();
-    
-    sf::RectangleShape _rec;
 
     private:
     void updateVelocity(float deltaTime) override;
