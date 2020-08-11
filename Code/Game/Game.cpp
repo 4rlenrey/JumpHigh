@@ -40,8 +40,8 @@ void Game::draw()
 {
   _window.clear();
 
-  _window.draw(_player._rec);
-
+  _window.draw(_player.getRectangleShape());
+  _window.draw(_testPlayer.getRectangleShape());
   _window.display();
 }
 
@@ -49,17 +49,20 @@ void Game::update()
 {
   Game::deltaTime();
   _player.update(_deltaTime);
+  _testPlayer.update(_deltaTime);
   _timer.restart();
 }
 
 void Game::run()
 {
-
+  _testPlayer.setMass(2);
+  _player.setMass(1);
   while (_window.isOpen())
   {
     pollEvents();
 
     update();
+    std::cout << checkCollision(_player, _testPlayer) << std::endl;
     draw();
 
   }

@@ -3,8 +3,9 @@
 
 #include <ostream>
 #include <SFML/Graphics.hpp>
+#include "GameObject/GameObject.hpp"
 
-class Physical
+class Physical : public GameObject
 {
     friend std::ostream& operator<<(std::ostream& out, const Physical& obj);
 
@@ -17,10 +18,10 @@ class Physical
 
     Physical(float mass = DEFAULT_MASS);
     void applyForce(sf::Vector2f force);
-    void update(float deltaTime);
     void updateAcceleration();
     void updatePosition(float deltaTIme);
     
+    virtual void update(float deltaTime) override;
     virtual void updateVelocity(float deltaTime);
 
     float getMass() const;  
@@ -28,6 +29,7 @@ class Physical
     const sf::Vector2f& getPosition() const;
 
     void setVelocity(sf::Vector2f&& vec);
+    void setMass(float mass);
 
     private:
     float _mass;
@@ -35,7 +37,6 @@ class Physical
     sf::Vector2f _force;
     sf::Vector2f _velocity;
     sf::Vector2f _acceleration;
-    sf::Vector2f _position;
 };
 
 std::ostream& operator<<(std::ostream& out, const Physical& obj);
