@@ -1,29 +1,28 @@
 #include "Collision.h"
 #include "iostream"
+#include "GameObject/GameObject.hpp"
 
-// Size.x == width
-// Size.y == height
-
-bool checkCollision(sf::RectangleShape Obj1, sf::RectangleShape Obj2)
+hitbox::hitbox(const GameObject& obj)
+  : _position{obj.getPosition()}, _size{obj.getRectangleShape().getSize()},
+  right{_position.x + _size.x}, left{_position.x - _size.x},
+  top{_position.y - _size.y}, bottom{_position.y + _size.y}
 {
-  hitbox _hitbox1;
-  hitbox _hitbox2;
+}
 
-  _hitbox1.Size = Obj1.getSize();
-  _hitbox1.Position = Obj1.getPosition();
-
-  _hitbox2.Size = Obj2.getSize();
-  _hitbox2.Position = Obj2.getPosition();
+bool checkCollision(const GameObject& obj1, const GameObject& obj2)
+{
+  hitbox hitbox1{obj1};
+  hitbox hitbox2{obj2};
 
   if(
-    _hitbox1.Position.x < (_hitbox2.Size.x + _hitbox2.Position.x) &&
-    (_hitbox1.Position.x + _hitbox1.Size.x) > _hitbox2.Position.x &&
-    _hitbox1.Position.y < (_hitbox2.Size.y + _hitbox2.Position.y) &&
-    (_hitbox1.Position.y + _hitbox1.Size.y) > _hitbox2.Position.y
-    )
-      {
-        return true;
-      }
+    hitbox1.left < hitbox2.left && hitbox1.right > hitbox2.left ||
+    hitbox1.right > hitbox2.right && hitbox1.left < hitbox2.right ||
+    hitbox1.bottom > hitbox2.bottom && hitbox1.top < hitbox2.bottom ||
+    hitbox1.top < hitbox2.top && hitbox1.bottom > hitbox2.top)
+  {
+    return true;
+  }
 
-    return false;
+  return false;
+
 }
