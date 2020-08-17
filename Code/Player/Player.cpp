@@ -5,9 +5,8 @@ const float Player::MAX_VELOCITY = 500.0f;
 const float Player::RECTANGLE_SIZE = 20.0f;
 
 Player::Player()
-    : _rec{sf::RectangleShape{sf::Vector2f{RECTANGLE_SIZE, RECTANGLE_SIZE}}}
 {
-    _rec.setFillColor(sf::Color::White);
+
 }
 
 void Player::update(float deltaTime)
@@ -36,7 +35,6 @@ void Player::update(float deltaTime)
     }
 
     Physical::update(deltaTime);
-    _rec.setPosition(getPosition());
 }
 
 void Player::jump()
