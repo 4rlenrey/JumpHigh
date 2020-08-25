@@ -15,10 +15,12 @@ bool checkCollision(const GameObject& obj1, const GameObject& obj2)
   hitbox hitbox2{obj2};
 
   if(
-    hitbox1.left < hitbox2.left && hitbox1.right > hitbox2.left ||
-    hitbox1.right > hitbox2.right && hitbox1.left < hitbox2.right ||
-    hitbox1.bottom > hitbox2.bottom && hitbox1.top < hitbox2.bottom ||
-    hitbox1.top < hitbox2.top && hitbox1.bottom > hitbox2.top)
+    (
+    hitbox1.left <= hitbox2.left && hitbox1.right >= hitbox2.left ||
+    hitbox1.right >= hitbox2.right && hitbox1.left <= hitbox2.right )&&(
+    hitbox1.bottom >= hitbox2.bottom && hitbox1.top <= hitbox2.bottom ||
+    hitbox1.top <= hitbox2.top && hitbox1.bottom >= hitbox2.top
+    ))
   {
     return true;
   }
