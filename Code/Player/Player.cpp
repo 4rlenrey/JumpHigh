@@ -1,8 +1,10 @@
 #include "Player/Player.h"
 #include "VectorFunctions/VectorFunctions.h"
+#include "Input/Input.h"
 
 const float Player::MAX_VELOCITY = 500.0f;
 const float Player::RECTANGLE_SIZE = 20.0f;
+const float Player::JUMP_VELOCITY = 1200.0f;
 
 Player::Player()
 {
@@ -11,11 +13,11 @@ Player::Player()
 
 void Player::update(float deltaTime)
 {
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+    if(Input::A.isPressed())
     {
         applyForce(sf::Vector2f{-1.0f, 0.0f});
     }
-    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+    else if(Input::D.isPressed())
     {
         applyForce(sf::Vector2f{1.0f, 0.0f});
     }
@@ -24,7 +26,7 @@ void Player::update(float deltaTime)
         applyForce(sf::Vector2f{0.0f, 0.0f});
     }
 
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+    if(Input::Space.justPressed() & !jumping)
     {
         jump();
         jumping = true;
@@ -39,7 +41,8 @@ void Player::update(float deltaTime)
 
 void Player::jump()
 {
-    setVelocity(sf::Vector2f{getVelocity().x, -1000.0f});
+    float jumpSpeed = -(JUMP_VELOCITY * (1 + abs(getVelocity().x)/MAX_VELOCITY)); //when moving fast in x axis then jumping higher
+    setVelocity(sf::Vector2f{getVelocity().x, jumpSpeed});
 }
 
 void Player::updateVelocity(float deltaTime)
