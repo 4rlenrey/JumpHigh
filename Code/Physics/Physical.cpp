@@ -7,7 +7,7 @@ const float Physical::DEFAULT_MASS = 1.0f;
 const float Physical::ACCELERATION_SCALE = 5000.0f; 
 const float Physical::GENERAL_FRICTION_FORCE_VALUE = 0.3f;
 const float Physical::MIN_SPEED_THRESHOLD = 1e-6;
-const sf::Vector2f Physical::GRAVITY_FORCE = sf::Vector2f{0.0f, 0.6f};
+const sf::Vector2f Physical::GRAVITY_FORCE = sf::Vector2f{0.0f, 2.0f};
 
 Physical::Physical(float mass)
     : _mass{mass}, _decelerationValue{(GENERAL_FRICTION_FORCE_VALUE / _mass) * ACCELERATION_SCALE}

@@ -2,11 +2,15 @@ CC = g++
 LIBS = -lsfml-graphics -lsfml-window -lsfml-system -lm
 FLAGS = -g -Wall
 CODE_LOCATION = Code
+TESTS_LOCATION = Tests
 INCLUDES = -I Code/
 
 CPP =\
 	${CODE_LOCATION}/*.cpp\
 	${CODE_LOCATION}/*/*.cpp
+
+InputTest = ${TESTS_LOCATION}/InputTest.cpp
+InputTest_Code = $(CODE_LOCATION)/Input/Input.cpp
 
 all: main
 
@@ -20,3 +24,6 @@ compile:
 main: $(CPP)
 	$(CC) -g $(CPP) $(LIBS) $(INCLUDES) -pthread -std=c++11  -o JumpHigh
 	make clean
+
+input:
+	$(CC) -g ${InputTest} ${InputTest_Code} $(LIBS) $(INCLUDES) -o InputTest

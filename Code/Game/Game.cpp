@@ -2,6 +2,7 @@
 #include "Game/Game.h"
 #include "VectorFunctions/VectorFunctions.h"
 #include "Collision/Collision.h"
+#include "Input/Input.h"
 
 const std::string Game::TITLE = "JumpHigh";
 const sf::Vector2u Game::DEFAULT_WINDOW_SIZE = sf::Vector2u{1280, 720};
@@ -48,6 +49,7 @@ void Game::draw()
 void Game::update()
 {
   Game::deltaTime();
+  Input::update();
   _player.update(_deltaTime);
   _testPlayer.update(_deltaTime);
   _timer.restart();
@@ -56,13 +58,12 @@ void Game::update()
 void Game::run()
 {
   _testPlayer.setMass(2);
-  _player.setMass(1);
+  _player.setMass(3);
   while (_window.isOpen())
   {
     pollEvents();
 
     update();
-    std::cout << checkCollision(_player, _testPlayer) << std::endl;
     draw();
 
   }
