@@ -13,12 +13,15 @@ class Player : public Physical
     
     Player();
 
+    virtual void applyForce(const sf::Vector2f&) override;
     void update(float deltaTime) override;
     void jump();
 
     private:
     void updateVelocity(float deltaTime) override;
-    bool jumping;
+    void applyCollisionForces();
+    bool jumping = false;
+    bool standing = false;
 };
 
 #endif

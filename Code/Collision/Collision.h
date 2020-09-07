@@ -2,7 +2,8 @@
 #define COLLISION_H
 
 #include <SFML/Graphics.hpp>
-#include "GameObject/GameObject.hpp"
+
+class GameObject; //forward declaration... basically bad code structure but lets just ommit it for now...
 
 struct hitbox 
 {
@@ -15,7 +16,33 @@ struct hitbox
   float bottom;
 };
 
-bool checkCollision(const GameObject& Obj1, const GameObject& Obj2);
+struct collisionInfo
+{
+  bool left   = false;
+  bool right  = false;
+  bool top    = false;
+  bool bottom = false;
+  std::vector<GameObject*> collided;
 
+  void setLeft();
+  void setRight();
+  void setTop();
+  void setBottom();
+  void setMirroredInfo();
+
+  bool operator!=(const collisionInfo& test)
+  {
+    if(left != test.left || right != test.right || top != test.top || bottom != test.bottom)
+    {
+      return true;
+    }
+    return false;
+  }
+
+};
+
+bool checkCollision(GameObject& Obj1, GameObject& Obj2);
+void checkAllCollisions();
+void resetAllCollisions();
 
 #endif

@@ -2,38 +2,37 @@
 #define GAME_OBJECT
 
 #include <SFML/Graphics.hpp>
+#include "Collision/Collision.h"
+#include <vector>
 
-class GameObject
+class GameObject : public sf::Drawable
 {
     public:
-    GameObject()
-        : _box{sf::RectangleShape{sf::Vector2f{10,10}}}
-    {
-    };
+    static std::vector<GameObject*> gameObjects;
+    GameObject();
+    GameObject(const sf::Vector2f&, const sf::Vector2f&);
 
-    const sf::Vector2f& getPosition() const
-    {
-        return _position;
-    }
-    
-    const sf::RectangleShape& getRectangleShape() const
-    {
-        return _box;
-    }
+    virtual ~GameObject();
 
-    virtual void update(float deltaTime)
-    {
-        updateBox();
-    }
+    virtual void update(float deltaTime = 0.0f); 
+    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+    void updateCollisionInfo(const collisionInfo& info = collisionInfo{});
+    void resetCollisionInfo();
 
-    void updateBox()
-    {
-        _box.setPosition(_position);
-    }
+    const sf::Vector2f& getPosition() const;
+    const sf::RectangleShape& getRectangleShape() const;
+    const sf::Sprite& getSprite() const;
 
     protected:
     sf::Vector2f _position;
     sf::RectangleShape _box;
+    sf::Sprite _sprite;
+    collisionInfo _collisionInfo;
+
+    private:
+    virtual void updateBox();
+    virtual void updateSprite();
+    
 };
 
 #endif

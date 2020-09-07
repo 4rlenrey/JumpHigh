@@ -17,7 +17,8 @@ class Physical : public GameObject
     static const sf::Vector2f GRAVITY_FORCE;            //object falling acceleration
 
     Physical(float mass = DEFAULT_MASS);
-    void applyForce(sf::Vector2f force);
+    virtual ~Physical();
+    virtual void applyForce(const sf::Vector2f& force);
     void updateAcceleration();
     void updatePosition(float deltaTIme);
     
@@ -27,11 +28,14 @@ class Physical : public GameObject
     float getMass() const;  
     const sf::Vector2f& getVelocity() const;
     const sf::Vector2f& getPosition() const;
+    const sf::Vector2f& getAppliedForce() const;
+    const sf::Vector2f& getAcceleration() const;
 
-    void setVelocity(sf::Vector2f&& vec);
+    void setVelocity(const sf::Vector2f& vec);
+    void setAcceleration(const sf::Vector2f& accel);
     void setMass(float mass);
 
-    private:
+    protected:
     float _mass;
     float _decelerationValue;
     sf::Vector2f _force;

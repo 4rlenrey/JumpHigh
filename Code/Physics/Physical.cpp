@@ -14,7 +14,9 @@ Physical::Physical(float mass)
 {
 }
 
-void Physical::applyForce(sf::Vector2f force)
+Physical::~Physical(){}
+
+void Physical::applyForce(const sf::Vector2f& force)
 {
     _force = force + GRAVITY_FORCE; 
 }
@@ -67,13 +69,28 @@ const sf::Vector2f& Physical::getVelocity() const
     return _velocity;
 }
 
+const sf::Vector2f& Physical::getAppliedForce() const
+{
+    return _force;
+}
+
+const sf::Vector2f& Physical::getAcceleration() const
+{
+    return _acceleration;
+}
+
 void Physical::setMass(float mass)
 {
     _mass = mass;
 }
-void Physical::setVelocity(sf::Vector2f&& vec)
+void Physical::setVelocity(const sf::Vector2f& vec)
 {
     _velocity = vec;
+}
+
+void Physical::setAcceleration(const sf::Vector2f& accel)
+{
+    _acceleration = accel;
 }
 
 std::ostream& operator<<(std::ostream& out, const Physical& obj)
