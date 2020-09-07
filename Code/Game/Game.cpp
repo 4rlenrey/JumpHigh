@@ -15,7 +15,7 @@ void Game::deltaTime()
 }
 
 Game::Game(std::string title, sf::Vector2u windowSize)
-  : _title{title}, _windowSize{windowSize}
+  : _title{title}, _windowSize{windowSize}, _testPlatform{sf::Vector2f{200,500}, sf::Vector2f{200, 200}}
 {
   start();
 }
@@ -41,8 +41,12 @@ void Game::draw()
 {
   _window.clear();
 
+  for(auto it = std::begin(GameObject::gameObjects); it != std::end(GameObject::gameObjects); it++)
+  {
+    _window.draw(*(*it));
+  }
+  _window.draw(_testPlatform);
   _window.draw(_player.getRectangleShape());
-  _window.draw(_testPlayer.getRectangleShape());
   _window.display();
 }
 
@@ -50,14 +54,19 @@ void Game::update()
 {
   Game::deltaTime();
   Input::update();
-  _player.update(_deltaTime);
-  _testPlayer.update(_deltaTime);
+  resetAllCollisions();
+  checkAllCollisions();
+  
+  for(auto it = std::begin(GameObject::gameObjects); it != std::end(GameObject::gameObjects); it++)
+  {
+    (*it)->update(_deltaTime);
+  }
+  
   _timer.restart();
 }
 
 void Game::run()
 {
-  _testPlayer.setMass(2);
   _player.setMass(3);
   while (_window.isOpen())
   {

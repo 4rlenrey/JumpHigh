@@ -5,6 +5,7 @@
 #include <string>
 #include <SFML/Graphics.hpp>
 #include "Player/Player.h"
+#include "Platform/Platform.hpp"
 
 class Game
 {
@@ -35,7 +36,7 @@ class Game
 
 
   Player _player;
-  Player _testPlayer;
+  Platform _testPlatform;
 
 };
 
