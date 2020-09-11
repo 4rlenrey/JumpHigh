@@ -15,7 +15,7 @@ void Game::deltaTime()
 }
 
 Game::Game(std::string title, sf::Vector2u windowSize)
-  : _title{title}, _windowSize{windowSize}, _testPlatform{sf::Vector2f{200,500}, sf::Vector2f{200, 200}}
+  : _title{title}, _windowSize{windowSize}, _testPlatform{sf::Vector2f{200,500}, sf::Vector2f{200, 200}}, _world{4}
 {
   start();
 }

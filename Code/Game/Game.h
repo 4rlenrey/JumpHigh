@@ -6,6 +6,7 @@
 #include <SFML/Graphics.hpp>
 #include "Player/Player.h"
 #include "Platform/Platform.hpp"
+#include "World/World.h"
 
 class Game
 {
@@ -35,6 +36,7 @@ class Game
 
 
 
+  World _world;
   Player _player;
   Platform _testPlatform;
 
