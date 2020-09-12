@@ -1,46 +1,30 @@
-#include "World/World.h"
-#include <SFML/Graphics.hpp>
-#include <vector>
-#include "Platform/Platform.hpp"
-#include <cstdlib>
-#include <ctime>
+#include "World.hpp"
+#include <random>
+#include <iostream>
 
-using namespace std;
-
-
-void World::generatePlatform(sf::Vector2f po, sf::Vector2f s){
-    //fix later
-   
-    // srand(time(NULL));
-    
-    // sf::Vector2f posiston; 
-    // posiston.x = 100;
-    // posiston.y = 100;
-
-    // sf::Vector2f size;
-    // size.x = (rand() % 200)+100;
-    // size.y = (rand() % 50)+100;
-
-    World::platforms.push_back(new Platform{po, s});
+void World::generateWorld()
+{
+    for(int i = 0; i < 10; i++)
+    {
+        _platforms.push_back(Platform{sf::Vector2f{150.0f*i,600}});
+    }
+    for(int i = 0; i < 20; i++)
+    {
+        addPlatform();
+    }
 }
 
-World::World(const int& nPlatform)
+void World::addPlatform()
 {
-    sf::Vector2f s;
-    s.x = 681;
-    s.y = 151;
+    float randVal = static_cast<float>(random())/RAND_MAX;
+    float x = randVal * 1200;
+    float y = (_platforms.size()-10) * _platformDistance + randVal * 40; 
+    sf::Vector2f pos{x,y};
 
-    sf::Vector2f po;
-    po.x = 0;
-    po.y = 0;
+    _platforms.push_back(Platform{pos});
+}
 
-    World::numberOfPlatforms = nPlatform;
-
-    for(int i = 0; i < nPlatform; i++)
-    {
-    po.x = po.x + 100;
-    po.y = po.y + 160;
-
-    World::generatePlatform(po, s);
-    }
+std::vector<Platform>& World::getPlatforms()
+{
+    return _platforms;
 }

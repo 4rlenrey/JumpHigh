@@ -5,9 +5,9 @@
 
 const float Physical::DEFAULT_MASS = 1.0f;
 const float Physical::ACCELERATION_SCALE = 5000.0f; 
-const float Physical::GENERAL_FRICTION_FORCE_VALUE = 0.3f;
-const float Physical::MIN_SPEED_THRESHOLD = 1e-6;
-const sf::Vector2f Physical::GRAVITY_FORCE = sf::Vector2f{0.0f, 2.0f};
+const float Physical::GENERAL_FRICTION_FORCE_VALUE = 0.2f;
+const float Physical::MIN_SPEED_THRESHOLD = 1e-4;
+const sf::Vector2f Physical::GRAVITY_FORCE = sf::Vector2f{0.0f, 1.0f};
 
 Physical::Physical(float mass)
     : _mass{mass}, _decelerationValue{(GENERAL_FRICTION_FORCE_VALUE / _mass) * ACCELERATION_SCALE}
@@ -35,9 +35,9 @@ void Physical::updateVelocity(float deltaTime)
         _velocity.x = 0.0f; //stop object's horizontal movement (no sliding)
     }
     
-    if(length(_velocity))
+    if(std::abs(_velocity.x))
     {
-        _velocity -= normalized(_velocity) * _decelerationValue * deltaTime;  //slow down object when moving
+        _velocity -= normalized(sf::Vector2f{_velocity.x, 0.0f}) * _decelerationValue * deltaTime;  //slow down object when moving
     }
 }
 

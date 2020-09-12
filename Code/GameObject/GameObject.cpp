@@ -1,18 +1,19 @@
 #include "GameObject/GameObject.hpp"
 #include <algorithm>
+#include <iostream>
 
 std::vector<GameObject*> GameObject::gameObjects = {};
 
 GameObject::GameObject()
     : _box{sf::RectangleShape{sf::Vector2f{10,10}}}
 {
-    gameObjects.push_back(this);
+    //gameObjects.push_back(this);
 }
 
 GameObject::GameObject(const sf::Vector2f& pos, const sf::Vector2f& boxSize)
     : _position{pos}, _box{sf::RectangleShape{boxSize}}
 {
-    gameObjects.push_back(this);
+    //gameObjects.push_back(this);
 }
 
 GameObject::~GameObject()
