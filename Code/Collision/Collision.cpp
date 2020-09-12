@@ -51,6 +51,21 @@ void collisionInfo::setBottom()
   bottom = true;
 }
 
+void drawHitbox(sf::RenderTarget& window,GameObject& obj)
+{
+  hitbox hitbox{obj};
+  sf::VertexArray lines(sf::LinesStrip, 8);
+  lines[0].position = sf::Vector2f{hitbox.left, hitbox.top};
+  lines[1].position = sf::Vector2f{hitbox.right, hitbox.top}; 
+  lines[2].position = sf::Vector2f{hitbox.left, hitbox.bottom};
+  lines[3].position = sf::Vector2f{hitbox.right, hitbox.bottom};
+  lines[4].position = sf::Vector2f{hitbox.left, hitbox.top};
+  lines[5].position = sf::Vector2f{hitbox.left, hitbox.bottom};
+  lines[6].position = sf::Vector2f{hitbox.right, hitbox.top};
+  lines[7].position = sf::Vector2f{hitbox.right, hitbox.bottom};   
+  window.draw(lines);
+}
+
 bool checkCollision(GameObject& obj1, GameObject& obj2)
 {
   hitbox hitbox1{obj1};

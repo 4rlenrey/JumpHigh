@@ -4,18 +4,20 @@
 #include "GameObject/GameObject.hpp"
 #include <string>
 #include <SFML/Graphics.hpp>
+#include <vector>
 
 class Platform : public GameObject
 {
     public: 
-    static sf::Texture TEXTURE;
-    static void loadTexture(const std::string&);
+    static std::vector<sf::Texture> PLATFORM_DATABASE;
+    static void loadTextures(const std::string&);
 
     Platform() = default;
-    Platform(const sf::Vector2f&, const sf::Vector2f&);
+    Platform(const sf::Vector2f&, const sf::Vector2f& size = sf::Vector2f{}, int index = 0);
 
     private:
     virtual void updateBox() override;
+    int _index;
 };
 
 
