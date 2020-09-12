@@ -6,12 +6,46 @@
 #include <SFML/Graphics.hpp>
 #include "Player/Player.h"
 #include "Platform/Platform.hpp"
+#include "AnimationSystem/AnimationSystem.h"
+#include "World/World.hpp"
+
+class FpsCounter
+{
+  public:
+  
+  void work()
+  {
+    count();
+    print();
+  }
+  
+  private:
+  void print()
+  {
+    if(_frameCount == 200)
+    {
+      std::cout << "FPS: " << _frameCount/_timer.getElapsedTime().asSeconds() << std::endl;
+      _timer.restart();
+      _frameCount = 0;
+    }
+  }
+
+  void count()
+  {
+    ++_frameCount;
+  }
+
+  int _frameCount = 0;
+  sf::Clock _timer;
+};
 
 class Game
 {
   public:
   static const std::string TITLE;
   static const sf::Vector2u DEFAULT_WINDOW_SIZE;
+
+  static sf::Texture BACKGROUND_TXT;
 
   static sf::Clock _timer;
   static float _deltaTime;
@@ -33,19 +67,12 @@ class Game
   sf::Vector2u _windowSize;
   sf::Event _event;
 
-
-
   Player _player;
-  Platform _testPlatform;
+  World _world;
 
-};
+  sf::Sprite background;
 
-class FpsCounter
-{
-  public:
-
-  private:
-  int count;
+  FpsCounter FPS;
 };
 
 #endif
