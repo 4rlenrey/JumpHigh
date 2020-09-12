@@ -16,6 +16,12 @@ class GameObject : public sf::Drawable
 
     virtual void update(float deltaTime = 0.0f); 
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+
+    void registerThisInStaticVector()
+    {
+        gameObjects.push_back(this);
+    }
+    
     void updateCollisionInfo(const collisionInfo& info = collisionInfo{});
     void resetCollisionInfo();
 
