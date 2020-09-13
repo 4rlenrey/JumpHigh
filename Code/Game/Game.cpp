@@ -4,6 +4,7 @@
 #include "Collision/Collision.h"
 #include "Input/Input.h"
 #include "Menu/Menu.h"
+#include <iostream>
 
 const std::string Game::TITLE = "JumpHigh";
 const sf::Vector2u Game::DEFAULT_WINDOW_SIZE = sf::Vector2u{1280, 720};
@@ -99,9 +100,13 @@ void Game::run()
 
     update();
     if(_menu.isOpen())
+    {
       _menu.open(_window);
+      _timer.restart();
+    }
     
     draw();
+    std::cout << _player.getPosition() << std::endl;
     Game::deltaTime();
   }
 }
