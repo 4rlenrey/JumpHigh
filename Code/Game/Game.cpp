@@ -17,7 +17,7 @@ void Game::deltaTime()
 }
 
 Game::Game(std::string title, sf::Vector2u windowSize)
-    : _title{title}, _windowSize{windowSize}
+    : _title{title}, _windowSize{windowSize}, _cameraController{_player}
 {
   start();
 }
@@ -27,6 +27,7 @@ void Game::start()
   background.setTexture(BACKGROUND_TXT);
   _window.create(sf::VideoMode(_windowSize.x, _windowSize.y), _title);
   _window.setFramerateLimit(0);
+  _window.setView(_cameraController.getView());
 
   _world.generateWorld();
 
@@ -86,6 +87,9 @@ void Game::update()
     }
   }
   
+  _cameraController.update(_deltaTime);
+  _window.setView(_cameraController.getView());
+
   _timer.restart();
 
   FPS.work();
