@@ -43,7 +43,7 @@ struct collisionInfo
 
 void drawHitbox(sf::RenderTarget& window,GameObject& obj);
 bool checkCollision(GameObject& Obj1, GameObject& Obj2);
-void checkAllCollisions();
+void checkAllCollisions(const GameObject&);
 void resetAllCollisions();
 
 #endif

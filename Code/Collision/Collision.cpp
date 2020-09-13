@@ -95,13 +95,22 @@ bool checkCollision(GameObject& obj1, GameObject& obj2)
   return false;
 }
 
-void checkAllCollisions()
+float distance2(const sf::Vector2f& pos1, const sf::Vector2f& pos2)
+{
+  sf::Vector2f dstVec = pos2-pos1;
+  return dstVec.x*dstVec.x + dstVec.y*dstVec.y;
+}
+
+void checkAllCollisions(const GameObject& refObject)
 {
   for(auto it = std::begin(GameObject::gameObjects); it != std::end(GameObject::gameObjects); it++)
   {
-    for(auto yeet = it + 1; yeet != std::end(GameObject::gameObjects); yeet++)
+    if(distance2(refObject.getPosition(), (*it)->getPosition()) < 1000)
     {
-      checkCollision(*(*it), *(*yeet));
+      for(auto yeet = it + 1; yeet != std::end(GameObject::gameObjects); yeet++)
+      {
+        checkCollision(*(*it), *(*yeet));
+      }
     }
   }
 }
