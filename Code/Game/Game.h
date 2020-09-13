@@ -8,6 +8,7 @@
 #include "Platform/Platform.hpp"
 #include "AnimationSystem/AnimationSystem.h"
 #include "World/World.hpp"
+#include "CameraController/CameraController.h"
 
 class FpsCounter
 {
@@ -67,8 +68,11 @@ class Game
   sf::Vector2u _windowSize;
   sf::Event _event;
 
+
   Player _player;
+  CameraController _cameraController;
   World _world;
+
 
   sf::Sprite background;
 
