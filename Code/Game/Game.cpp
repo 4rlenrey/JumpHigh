@@ -32,6 +32,8 @@ void Game::start()
   _world.generateWorld();
 
   _player.setMass(3);
+  _player.setPosition(sf::Vector2f{600, 300});
+  
   _player.registerThisInStaticVector();
 
   for(auto& platform : _world.getPlatforms())
@@ -59,7 +61,7 @@ void Game::draw()
   for(auto& obj : GameObject::gameObjects)
   { 
       _window.draw(*obj);
-      //drawHitbox(_window, *obj);
+      // drawHitbox(_window, *obj);
   }
 
   _window.display();
