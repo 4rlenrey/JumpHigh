@@ -9,6 +9,7 @@
 #include "AnimationSystem/AnimationSystem.h"
 #include "World/World.hpp"
 #include "CameraController/CameraController.h"
+#include "Menu/Menu.h"
 
 class FpsCounter
 {
@@ -67,7 +68,7 @@ class Game
   std::string _title;
   sf::Vector2u _windowSize;
   sf::Event _event;
-
+  Menu _menu;
 
   Player _player;
   CameraController _cameraController;
