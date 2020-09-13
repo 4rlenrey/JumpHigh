@@ -3,6 +3,7 @@
 #include "VectorFunctions/VectorFunctions.h"
 #include "Collision/Collision.h"
 #include "Input/Input.h"
+#include "Menu/Menu.h"
 
 const std::string Game::TITLE = "JumpHigh";
 const sf::Vector2u Game::DEFAULT_WINDOW_SIZE = sf::Vector2u{1280, 720};
@@ -28,6 +29,8 @@ void Game::start()
   _window.create(sf::VideoMode(_windowSize.x, _windowSize.y), _title);
   _window.setFramerateLimit(0);
   _window.setView(_cameraController.getView());
+
+
 
   _world.generateWorld();
 
@@ -73,6 +76,8 @@ void Game::update()
   resetAllCollisions();
   checkAllCollisions(_player);
 
+  _menu.checkInput();
+
   for(auto& obj : GameObject::gameObjects)
   {
       obj->update(_deltaTime);
@@ -93,7 +98,9 @@ void Game::run()
     pollEvents();
 
     update();
-
+    if(_menu.isOpen())
+      _menu.open(_window);
+    
     draw();
     Game::deltaTime();
   }
