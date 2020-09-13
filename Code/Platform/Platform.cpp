@@ -33,13 +33,17 @@ Platform::Platform(const sf::Vector2f& pos, int index)
 }
 
 Platform::Platform(const sf::Vector2f& pos, const sf::Vector2f& boxSize)
-    : GameObject(pos, boxSize), _index{0}
+    : GameObject(pos, boxSize), _index{-1}
 {
     _box.setPosition(pos);
+    _sprite.setTexture(PLATFORM_DATABASE[0]);
 }
 
 void Platform::updateBox()
 {
+    if(_index >=0)
+    {
+
     _box.setPosition(_position);
     
     float divide = 0.0f;
@@ -49,4 +53,5 @@ void Platform::updateBox()
     sf::Vector2f size{_sprite.getTexture()->getSize().x * _sprite.getScale().x/divide, _sprite.getTexture()->getSize().y * _sprite.getScale().y/10.0f};
 
     _box.setSize(size);
+    }
 }

@@ -58,15 +58,8 @@ void Game::draw()
   
   for(auto& obj : GameObject::gameObjects)
   { 
-    if(obj->getSprite().getTexture())
-    {
       _window.draw(*obj);
-      drawHitbox(_window, *obj);
-    }
-    else
-    {
-      _window.draw(obj->getRectangleShape());
-    }
+      //drawHitbox(_window, *obj);
   }
 
   _window.display();
@@ -74,17 +67,13 @@ void Game::draw()
 
 void Game::update()
 {
-  Game::deltaTime();
   Input::update();
   resetAllCollisions();
-  checkAllCollisions();
+  checkAllCollisions(_player);
 
-  for(auto obj : GameObject::gameObjects)
+  for(auto& obj : GameObject::gameObjects)
   {
-    if(obj->getSprite().getTexture())
-    {
       obj->update(_deltaTime);
-    }
   }
   
   _cameraController.update(_deltaTime);
@@ -104,5 +93,6 @@ void Game::run()
     update();
 
     draw();
+    Game::deltaTime();
   }
 }
