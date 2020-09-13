@@ -15,8 +15,8 @@ void Platform::loadTextures(const std::string& path)
     }
 }
 
-Platform::Platform(const sf::Vector2f& pos, const sf::Vector2f& boxSize, int index)
-    : GameObject(pos, boxSize), _index{index}
+Platform::Platform(const sf::Vector2f& pos, int index)
+    : GameObject(pos), _index{index}
 {
     _sprite.setTexture(PLATFORM_DATABASE[index]);
     if(_index % 2 == 1)
@@ -30,6 +30,12 @@ Platform::Platform(const sf::Vector2f& pos, const sf::Vector2f& boxSize, int ind
     _sprite.setScale(3,3);
 
     update();    
+}
+
+Platform::Platform(const sf::Vector2f& pos, const sf::Vector2f& boxSize)
+    : GameObject(pos, boxSize), _index{0}
+{
+    _box.setPosition(pos);
 }
 
 void Platform::updateBox()

@@ -33,6 +33,7 @@ void Player::update(float deltaTime)
     Physical::update(deltaTime);
 
     _jumping ? _animationSystem.animate(_sprite, true) : _animationSystem.animate(_sprite);
+    _prevJumping = _jumping;
 }
 
 void Player::jump()
@@ -96,14 +97,13 @@ void Player::applyCollisionForces()
             _jumping = false;
             setVelocity(sf::Vector2f{getVelocity().x, 0.0f});
         }
-        if(getAcceleration().y > 0.0f)
-        {
-            setAcceleration(sf::Vector2f{getAcceleration().x, 0.0f} - Physical::GRAVITY_FORCE);
-        }
-        for(auto objPtr : _collisionInfo.collided)
-        {
-            _position.y = objPtr->getPosition().y - _box.getSize().y;
-        }
+
+        setAcceleration(sf::Vector2f{getAcceleration().x, 0.0f} - Physical::GRAVITY_FORCE);
+    }
+    else
+    {
+        _standing = false;
+        _jumping = true;
     }
     
     // if(_collisionInfo.top)
@@ -160,7 +160,7 @@ void Player::animationSelectionBasedOnState()
         }
     }
 
-    if(justJumped())
+    if(justJumped() && getVelocity().y <= 0)
     {
         if(Input::Space.justPressed() && _jumping && isHighSpeed())
         {
