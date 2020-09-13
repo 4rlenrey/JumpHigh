@@ -18,7 +18,15 @@ void Platform::loadTextures(const std::string& path)
 Platform::Platform(const sf::Vector2f& pos, int index)
     : GameObject(pos), _index{index}
 {
-    _sprite.setTexture(PLATFORM_DATABASE[index]);
+    if(index < PLATFORM_DATABASE.size())
+    {
+        _sprite.setTexture(PLATFORM_DATABASE[index]);
+    }
+    else
+    {
+        _sprite.setTexture(*(PLATFORM_DATABASE.end()-1));
+    }
+
     if(_index % 2 == 1)
     {
         _sprite.setOrigin(_sprite.getTexture()->getSize().x/3.5f, _sprite.getTexture()->getSize().y/2.2f);
@@ -50,7 +58,7 @@ void Platform::updateBox()
 
     _index % 2 ? divide = 2.3f : divide = 1.3f;
     
-    sf::Vector2f size{_sprite.getTexture()->getSize().x * _sprite.getScale().x/divide, _sprite.getTexture()->getSize().y * _sprite.getScale().y/10.0f};
+    sf::Vector2f size{_sprite.getTexture()->getSize().x * _sprite.getScale().x/divide, _sprite.getTexture()->getSize().y * _sprite.getScale().y/20.0f};
 
     _box.setSize(size);
     }
