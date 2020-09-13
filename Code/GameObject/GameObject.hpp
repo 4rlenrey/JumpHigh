@@ -29,6 +29,8 @@ class GameObject : public sf::Drawable
     const sf::RectangleShape& getRectangleShape() const;
     const sf::Sprite& getSprite() const;
 
+    void setPosition(const sf::Vector2f& pos);
+    
     protected:
     sf::Vector2f _position;
     sf::RectangleShape _box;

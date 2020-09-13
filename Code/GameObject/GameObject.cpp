@@ -91,3 +91,8 @@ void GameObject::resetCollisionInfo()
     _collisionInfo.collided.clear();
     _collisionInfo = collisionInfo{};
 }
+
+void GameObject::setPosition(const sf::Vector2f& pos)
+{
+    _position = pos;
+}

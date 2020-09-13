@@ -18,7 +18,7 @@ class CameraController
     
         if(distance < -20)
         {
-            _view.move(sf::Vector2f{0.0f, distance*deltaTime});
+            _view.move(sf::Vector2f{0.0f, 2*distance*deltaTime});
         }
     }
 
