@@ -1,10 +1,11 @@
 #include <SFML/Graphics.hpp>
 #include "Menu.h"
+#include <iostream>
 
 sf::Font Menu::font;
 
 Options::Options(const Option option)
-  : _option{option}
+  : _option{option}, isSelected{false}
 {
 
 }
@@ -30,19 +31,25 @@ void Menu::checkInput()
     _isOpen = true;
   }
   if(Input::W.justPressed())
-      if(select < _options.size()-1)
-      {
-        _options[select].isSelected = false;
-        select++; 
-        _options[select].isSelected = true;
-      }
-  if(Input::S.justPressed())
+  {
+
       if(select > 0)
       {
         _options[select].isSelected = false;
-        select--;  
+        select--; 
         _options[select].isSelected = true;
       }
+  }
+  if(Input::S.justPressed())
+  {
+
+      if(select < _options.size()-1)
+      {
+        _options[select].isSelected = false;
+        select++;  
+        _options[select].isSelected = true;
+      }
+  }
 }
 
 bool Menu::isOpen()
@@ -64,6 +71,7 @@ void Menu::open(sf::RenderWindow& window)
 void Menu::update(sf::RenderWindow& window)
 {
   sf::Event _event;
+  Input::update();
   checkInput();
   changeColorWhenSelected();
   while (window.pollEvent(_event))
@@ -83,8 +91,9 @@ void Menu::changeColorWhenSelected()
     if (option.isSelected == true)
       option._text.setColor(sf::Color::Red);
     else
-      option._text.setColor(sf::Color::White);    
+      option._text.setColor(sf::Color::White);   
   } 
+  std::cout << select << std::endl;
 }
 
 std::vector<Options>& Menu::getOptions()
