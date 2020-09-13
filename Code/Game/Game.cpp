@@ -30,6 +30,7 @@ void Game::start()
 
   _world.generateWorld();
 
+  _player.setMass(3);
   _player.registerThisInStaticVector();
 
   for(auto& platform : _world.getPlatforms())
@@ -54,17 +55,19 @@ void Game::draw()
 {
   _window.clear();
   
-  //_window.draw(background);
-
-  //_window.draw(_player.getRectangleShape());
-
   for(auto& obj : GameObject::gameObjects)
   { 
-    _window.draw(*obj);
-    drawHitbox(_window, *obj);
+    if(obj->getSprite().getTexture())
+    {
+      _window.draw(*obj);
+      drawHitbox(_window, *obj);
+    }
+    else
+    {
+      _window.draw(obj->getRectangleShape());
+    }
   }
 
-  //_window.draw(_player.getRectangleShape());
   _window.display();
 }
 
@@ -75,10 +78,12 @@ void Game::update()
   resetAllCollisions();
   checkAllCollisions();
 
-
   for(auto obj : GameObject::gameObjects)
   {
-    obj->update(_deltaTime);
+    if(obj->getSprite().getTexture())
+    {
+      obj->update(_deltaTime);
+    }
   }
   
   _timer.restart();
@@ -88,7 +93,6 @@ void Game::update()
 
 void Game::run()
 { 
-  _player.setMass(3);
   while (_window.isOpen())
   {
     pollEvents();

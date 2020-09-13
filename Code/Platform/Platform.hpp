@@ -13,7 +13,8 @@ class Platform : public GameObject
     static void loadTextures(const std::string&);
 
     Platform() = default;
-    Platform(const sf::Vector2f&, const sf::Vector2f& size = sf::Vector2f{}, int index = 0);
+    Platform(const sf::Vector2f&, int index = 0);
+    Platform(const sf::Vector2f&, const sf::Vector2f&);
 
     private:
     virtual void updateBox() override;
