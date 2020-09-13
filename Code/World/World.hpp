@@ -15,7 +15,7 @@ class World
     
     private:
     std::vector<Platform> _platforms;
-    float _platformDistance = 100.0f;
+    float _platformDistance = 50.0f;
 };
 
 #endif

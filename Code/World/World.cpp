@@ -14,12 +14,30 @@ void World::generateWorld()
 
 void World::addPlatform()
 {
+    static int maxIndex = 1;
+    static int nextThreshold = 50;
+    static int prevThreshold = 50;
+    static int minIndex = 0;
+
+    if(_platforms.size() > nextThreshold && maxIndex <= Platform::PLATFORM_DATABASE.size())
+    {
+        maxIndex++;
+        nextThreshold += 50;
+    }
+    if(_platforms.size() > prevThreshold+25 && minIndex <= Platform::PLATFORM_DATABASE.size())
+    {
+        prevThreshold = nextThreshold;
+        minIndex+=2;
+    }
+
     float randVal = static_cast<float>(random())/RAND_MAX;
-    float x = randVal * 1200;
-    float y = (5.0f - static_cast<float>(_platforms.size())) * _platformDistance + randVal * 40; 
+    float x = 200 + randVal * 800;
+    float y = (10 - static_cast<float>(_platforms.size())) * _platformDistance + randVal * 40; 
     sf::Vector2f pos{x,y};
 
-    _platforms.push_back(Platform{pos});
+
+    randVal = static_cast<float>(random())/RAND_MAX;
+    _platforms.push_back(Platform{pos,static_cast<int>(randVal*(2)) + minIndex});
 }
 
 std::vector<Platform>& World::getPlatforms()

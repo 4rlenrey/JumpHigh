@@ -4,7 +4,7 @@
 #include "Input/Input.h"
 #include <iostream>
 
-const float Player::MAX_VELOCITY = 500.0f;
+const float Player::MAX_VELOCITY = 1000.0f;
 const float Player::RECTANGLE_SIZE = 20.0f;
 const float Player::JUMP_VELOCITY = 800.0f;
 const float Player::HIGH_JUMP_THRESHOLD = 0.8f;
@@ -38,7 +38,7 @@ void Player::update(float deltaTime)
 
 void Player::jump()
 {
-    float jumpSpeed = -(JUMP_VELOCITY * (1 + 0.2*(abs(getVelocity().x)/MAX_VELOCITY))); //when moving fast in x axis then jumping higher
+    float jumpSpeed = -(JUMP_VELOCITY * (0.9f + (abs(getVelocity().x)/MAX_VELOCITY))); //when moving fast in x axis then jumping higher
     setVelocity(sf::Vector2f{getVelocity().x, jumpSpeed});
     _jumping = true;
 }
@@ -57,6 +57,15 @@ void Player::updateVelocity(float deltaTime)
         {
             setVelocity(sf::Vector2f{-MAX_VELOCITY, getVelocity().y}); //setting velocity to max speed
         }
+    }
+
+    if(getPosition().x < 200 && getVelocity().x < 0 && _jumping)
+    {
+        _velocity.x = -_velocity.x;
+    }
+    if(getPosition().x > 1000 && getVelocity().x > 0 && _jumping)
+    {
+        _velocity.x = -_velocity.x;
     }
 }
 
