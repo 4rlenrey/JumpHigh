@@ -17,7 +17,7 @@ void Game::deltaTime()
 }
 
 Game::Game(std::string title, sf::Vector2u windowSize)
-    : _title{title}, _windowSize{windowSize}
+    : _title{title}, _windowSize{windowSize}, _cameraController{_player}
 {
   start();
 }
@@ -27,9 +27,11 @@ void Game::start()
   background.setTexture(BACKGROUND_TXT);
   _window.create(sf::VideoMode(_windowSize.x, _windowSize.y), _title);
   _window.setFramerateLimit(0);
+  _window.setView(_cameraController.getView());
 
   _world.generateWorld();
 
+  _player.setMass(3);
   _player.registerThisInStaticVector();
 
   for(auto& platform : _world.getPlatforms())
@@ -54,33 +56,29 @@ void Game::draw()
 {
   _window.clear();
   
-  //_window.draw(background);
-
-  //_window.draw(_player.getRectangleShape());
-
   for(auto& obj : GameObject::gameObjects)
   { 
-    _window.draw(*obj);
-    drawHitbox(_window, *obj);
+      _window.draw(*obj);
+      //drawHitbox(_window, *obj);
   }
 
-  //_window.draw(_player.getRectangleShape());
   _window.display();
 }
 
 void Game::update()
 {
-  Game::deltaTime();
   Input::update();
   resetAllCollisions();
-  checkAllCollisions();
+  checkAllCollisions(_player);
 
-
-  for(auto obj : GameObject::gameObjects)
+  for(auto& obj : GameObject::gameObjects)
   {
-    obj->update(_deltaTime);
+      obj->update(_deltaTime);
   }
   
+  _cameraController.update(_deltaTime);
+  _window.setView(_cameraController.getView());
+
   _timer.restart();
 
   FPS.work();
@@ -88,7 +86,6 @@ void Game::update()
 
 void Game::run()
 { 
-  _player.setMass(3);
   while (_window.isOpen())
   {
     pollEvents();
@@ -96,5 +93,6 @@ void Game::run()
     update();
 
     draw();
+    Game::deltaTime();
   }
 }

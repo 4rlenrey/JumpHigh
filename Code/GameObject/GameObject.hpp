@@ -10,7 +10,7 @@ class GameObject : public sf::Drawable
     public:
     static std::vector<GameObject*> gameObjects;
     GameObject();
-    GameObject(const sf::Vector2f&, const sf::Vector2f&);
+    GameObject(const sf::Vector2f&, const sf::Vector2f& boxSize = sf::Vector2f{});
 
     virtual ~GameObject();
 
