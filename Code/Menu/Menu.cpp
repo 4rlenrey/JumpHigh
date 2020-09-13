@@ -50,13 +50,15 @@ bool Menu::isOpen()
   return _isOpen; 
 }
 
-void Menu::open(sf::RenderTarget& window)
+void Menu::open(sf::RenderWindow& window)
 {
   while (_isOpen)
   {
-    update(dynamic_cast<sf::RenderWindow&>(window));
+    update(window);
+    window.clear();
     for(Options& option : _options)
     window.draw(option._text);
+    window.display();
   }
 }
 void Menu::update(sf::RenderWindow& window)

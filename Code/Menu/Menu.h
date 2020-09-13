@@ -29,7 +29,7 @@ class Menu
     Menu();
     void run();
     bool isOpen();
-    void open(sf::RenderTarget&);
+    void open(sf::RenderWindow&);
     void update(sf::RenderWindow&);
     std::vector<Options>& getOptions();
     void checkInput();
