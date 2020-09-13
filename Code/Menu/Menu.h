@@ -23,6 +23,7 @@ class Menu
     int select;
     std::vector<Options> _options;
     bool _isOpen;
+    sf::Text help;
 
     public:
     static sf::Font font;

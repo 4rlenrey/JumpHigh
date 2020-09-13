@@ -13,7 +13,6 @@ Options::Options(const Option option)
 Menu::Menu()
   : select{0}, _isOpen{true}
 {
-  
   _options.push_back(Options{Option::Play});
   _options.back()._text.setString("Play");
   _options.push_back(Options{Option::Exit});
@@ -30,25 +29,33 @@ void Menu::checkInput()
   {
     _isOpen = true;
   }
-  if(Input::W.justPressed())
+  if(_isOpen == true)
   {
+    if(Input::W.justPressed())
+    {
+        if(select > 0)
+        {
+          _options[select].isSelected = false;
+          select--; 
+          _options[select].isSelected = true;
+        }
+    }
+    if(Input::S.justPressed())
+    {
 
-      if(select > 0)
-      {
-        _options[select].isSelected = false;
-        select--; 
-        _options[select].isSelected = true;
-      }
-  }
-  if(Input::S.justPressed())
-  {
-
-      if(select < _options.size()-1)
-      {
-        _options[select].isSelected = false;
-        select++;  
-        _options[select].isSelected = true;
-      }
+        if(select < _options.size()-1)
+        {
+          _options[select].isSelected = false;
+          select++;  
+          _options[select].isSelected = true;
+        }
+    }
+    if(Input::Space.justPressed() && select == 0)
+      _isOpen = false;
+    if(Input::Space.justPressed() && select == 1)
+    {
+      exit(1);
+    }
   }
 }
 
@@ -65,6 +72,7 @@ void Menu::open(sf::RenderWindow& window)
     window.clear();
     for(Options& option : _options)
     window.draw(option._text);
+    window.draw(help);
     window.display();
   }
 }
@@ -93,7 +101,7 @@ void Menu::changeColorWhenSelected()
     else
       option._text.setColor(sf::Color::White);   
   } 
-  std::cout << select << std::endl;
+  //std::cout << select << std::endl;
 }
 
 std::vector<Options>& Menu::getOptions()
@@ -105,9 +113,16 @@ void Menu::run()
 {
   for(int i = 0; i < _options.size(); i++)
   {
+    help.setString("Press space to confirm");
+    help.setFont(font);
+    help.setPosition(100, 500);
+    help.setCharacterSize(35);                          
+    help.setStyle(sf::Text::Bold); 
+    help.setColor(sf::Color::White);
+
     _options[i]._text.setFont(font);
     _options[i]._text.setPosition(100, 100 + 100*i);
-    _options[i]._text.setCharacterSize(24);                          
+    _options[i]._text.setCharacterSize(35);                          
     _options[i]._text.setStyle(sf::Text::Bold); 
     if (_options[i].isSelected == true)
       _options[i]._text.setColor(sf::Color::Red);
