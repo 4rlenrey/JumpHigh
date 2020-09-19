@@ -10,6 +10,7 @@
 #include "World/World.hpp"
 #include "CameraController/CameraController.h"
 #include "Menu/Menu.h"
+#include "Score/Score.h"
 
 class FpsCounter
 {
@@ -73,7 +74,7 @@ class Game
   Player _player;
   CameraController _cameraController;
   World _world;
-
+  Score _score;
 
   sf::Sprite background;
 

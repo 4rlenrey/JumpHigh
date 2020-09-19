@@ -97,9 +97,9 @@ void Menu::changeColorWhenSelected()
  for(Options& option : _options)
   {
     if (option.isSelected == true)
-      option._text.setColor(sf::Color::Red);
+      option._text.setFillColor(sf::Color::Red);
     else
-      option._text.setColor(sf::Color::White);   
+      option._text.setFillColor(sf::Color::White);   
   } 
   //std::cout << select << std::endl;
 }
@@ -118,15 +118,15 @@ void Menu::run()
     help.setPosition(100, 500);
     help.setCharacterSize(35);                          
     help.setStyle(sf::Text::Bold); 
-    help.setColor(sf::Color::White);
+    help.setFillColor(sf::Color::White);
 
     _options[i]._text.setFont(font);
     _options[i]._text.setPosition(100, 100 + 100*i);
     _options[i]._text.setCharacterSize(35);                          
     _options[i]._text.setStyle(sf::Text::Bold); 
     if (_options[i].isSelected == true)
-      _options[i]._text.setColor(sf::Color::Red);
+      _options[i]._text.setFillColor(sf::Color::Red);
     else
-      _options[i]._text.setColor(sf::Color::White);    
+      _options[i]._text.setFillColor(sf::Color::White);    
   }    
 }
