@@ -116,13 +116,13 @@ void Menu::run()
     help.setString("Press space to confirm");
     help.setFont(font);
     help.setPosition(100, 500);
-    help.setCharacterSize(35);                          
+    help.setCharacterSize(60);                          
     help.setStyle(sf::Text::Bold); 
     help.setFillColor(sf::Color::White);
 
     _options[i]._text.setFont(font);
     _options[i]._text.setPosition(100, 100 + 100*i);
-    _options[i]._text.setCharacterSize(35);                          
+    _options[i]._text.setCharacterSize(60);                          
     _options[i]._text.setStyle(sf::Text::Bold); 
     if (_options[i].isSelected == true)
       _options[i]._text.setFillColor(sf::Color::Red);

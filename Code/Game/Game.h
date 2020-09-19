@@ -62,7 +62,7 @@ class Game
   void pollEvents();
   void draw();
   void update();
-
+  void death();
 
   private:
   sf::RenderWindow _window;

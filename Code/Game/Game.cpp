@@ -78,7 +78,8 @@ void Game::update()
   resetAllCollisions();
   checkAllCollisions(_player);
   
-  
+  if(_player.getPosition().y > _cameraController.getView().getCenter().y + 350)
+    death();
   //_menu.checkInput();
 
   for(auto& obj : GameObject::gameObjects)
