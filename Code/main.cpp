@@ -12,6 +12,7 @@ int main()
     AnimationSystem::loadAnimations("./resources/Animations/");
     Platform::loadTextures("./resources/Textures/Platforms/");
     Menu::font.loadFromFile("./resources/Fonts/techniqo.ttf");
+    Score::font.loadFromFile("./resources/Fonts/techniqu.ttf");
 
     Game game{};
     

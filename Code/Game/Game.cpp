@@ -19,7 +19,7 @@ void Game::deltaTime()
 }
 
 Game::Game(std::string title, sf::Vector2u windowSize)
-    : _title{title}, _windowSize{windowSize}, _cameraController{_player}
+    : _title{title}, _windowSize{windowSize}, _cameraController{_player}, _score{_player, _cameraController.getView()}
 {
   start();
 }
@@ -67,6 +67,7 @@ void Game::draw()
       _window.draw(*obj);
       // drawHitbox(_window, *obj);
   }
+  _window.draw(_score.text);
 
   _window.display();
 }
@@ -76,8 +77,9 @@ void Game::update()
   Input::update();
   resetAllCollisions();
   checkAllCollisions(_player);
-
-  _menu.checkInput();
+  
+  
+  //_menu.checkInput();
 
   for(auto& obj : GameObject::gameObjects)
   {
@@ -86,7 +88,7 @@ void Game::update()
   
   _cameraController.update(_deltaTime);
   _window.setView(_cameraController.getView());
-
+  _score.update();
   _timer.restart();
 
   FPS.work();
@@ -106,7 +108,7 @@ void Game::run()
     }
     
     draw();
-    std::cout << _player.getPosition() << std::endl;
+    //std::cout << _player.getPosition() << std::endl;
     Game::deltaTime();
   }
 }
