@@ -11,8 +11,8 @@ int main()
     srand(time(nullptr));
     AnimationSystem::loadAnimations("./resources/Animations/");
     Platform::loadTextures("./resources/Textures/Platforms/");
-    Menu::font.loadFromFile("./resources/Fonts/techniqo.ttf");
-    Score::font.loadFromFile("./resources/Fonts/techniqu.ttf");
+    Menu::font.loadFromFile("./resources/Fonts/Kamikaze3DGradient.ttf");
+    Score::font.loadFromFile("./resources/Fonts/Kamikaze.ttf");
 
     Game game{};
     
