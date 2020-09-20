@@ -25,8 +25,8 @@ void Menu::setup()
   _options[0].isSelected = true;
 
   changableText.setFont(font);
-  changableText.setPosition(240, 110);
-  changableText.setCharacterSize(15);
+  changableText.setPosition(270, 110);
+  changableText.setCharacterSize(30);
   changableText.setFillColor(sf::Color::Blue);
 
   for(int i = 0; i < _options.size(); i++)
@@ -34,14 +34,14 @@ void Menu::setup()
     help.setString("Press space to confirm");
     help.setFont(font);
     help.setPosition(100, 500);
-    help.setCharacterSize(35);                          
+    help.setCharacterSize(50);                          
     help.setStyle(sf::Text::Bold); 
     help.setFillColor(sf::Color::White);
 
 
     _options[i]._text.setFont(font);
     _options[i]._text.setPosition(100, 100 + 100*i);
-    _options[i]._text.setCharacterSize(35);                          
+    _options[i]._text.setCharacterSize(50);                          
     _options[i]._text.setStyle(sf::Text::Bold); 
     if (_options[i].isSelected == true)
       _options[i]._text.setFillColor(sf::Color::Red);

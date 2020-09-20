@@ -19,7 +19,7 @@ void Game::deltaTime()
 }
 
 Game::Game(std::string title, sf::Vector2u windowSize)
-    : _title{title}, _windowSize{windowSize}, _cameraController{_player}, _score{_player, _cameraController.getView()}
+    : _title{title}, _windowSize{windowSize}, _cameraController{_player}, _score{_player, _cameraController.getView()}, _spikes{}
 {
   start();
 }
@@ -68,6 +68,7 @@ void Game::draw()
       // drawHitbox(_window, *obj);
   }
   _window.draw(_score.text);
+  _window.draw(_spikes._sprite);
 
   _window.display();
 }
@@ -78,8 +79,7 @@ void Game::update()
   resetAllCollisions();
   checkAllCollisions(_player);
   
-  if(_player.getPosition().y > _cameraController.getView().getCenter().y + 350)
-    death();
+
   //_menu.checkInput();
 
   for(auto& obj : GameObject::gameObjects)
@@ -91,7 +91,7 @@ void Game::update()
   _window.setView(_cameraController.getView());
   _score.update();
   _timer.restart();
-
+  _spikes.update(_deltaTime);
   FPS.work();
 }
 
@@ -105,6 +105,8 @@ void Game::restart()
     platform.registerThisInStaticVector();
   }
   _player.reset();
+  _spikes.reset();
+  _score._score = 0;
   _cameraController.getView().setCenter(_windowSize.x/2.0f, _windowSize.y/2.0f);
   _menu.trigger("Try again!");
   
@@ -116,7 +118,10 @@ void Game::run()
   {
     pollEvents();
 
-    if(_player.getPosition().y > _cameraController.getView().getCenter().y + _windowSize.y/2.0f)
+    if(
+      _player.getPosition().y > _cameraController.getView().getCenter().y + _windowSize.y/2.0f ||
+      _player.getPosition().y >= _spikes._sprite.getPosition().y - 10
+     )
     {
       restart();
     }
