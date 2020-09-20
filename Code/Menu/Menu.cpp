@@ -13,15 +13,42 @@ Options::Options(const Option option)
 Menu::Menu()
   : select{0}, _isOpen{true}
 {
+  setup();
+}
+
+void Menu::setup()
+{
   _options.push_back(Options{Option::Play});
   _options.back()._text.setString("Play");
   _options.push_back(Options{Option::Exit});
   _options.back()._text.setString("Exit");
   _options[0].isSelected = true;
 
-  run();
-}
+  changableText.setFont(font);
+  changableText.setPosition(240, 110);
+  changableText.setCharacterSize(15);
+  changableText.setFillColor(sf::Color::Blue);
 
+  for(int i = 0; i < _options.size(); i++)
+  {
+    help.setString("Press space to confirm");
+    help.setFont(font);
+    help.setPosition(100, 500);
+    help.setCharacterSize(35);                          
+    help.setStyle(sf::Text::Bold); 
+    help.setFillColor(sf::Color::White);
+
+
+    _options[i]._text.setFont(font);
+    _options[i]._text.setPosition(100, 100 + 100*i);
+    _options[i]._text.setCharacterSize(35);                          
+    _options[i]._text.setStyle(sf::Text::Bold); 
+    if (_options[i].isSelected == true)
+      _options[i]._text.setColor(sf::Color::Red);
+    else
+      _options[i]._text.setColor(sf::Color::White);    
+  }    
+}
 
 void Menu::checkInput()
 {
@@ -73,6 +100,7 @@ void Menu::open(sf::RenderWindow& window)
     for(Options& option : _options)
     window.draw(option._text);
     window.draw(help);
+    window.draw(changableText);
     window.display();
   }
 }
@@ -109,24 +137,9 @@ std::vector<Options>& Menu::getOptions()
   return _options;
 }
 
-void Menu::run()
-{
-  for(int i = 0; i < _options.size(); i++)
-  {
-    help.setString("Press space to confirm");
-    help.setFont(font);
-    help.setPosition(100, 500);
-    help.setCharacterSize(35);                          
-    help.setStyle(sf::Text::Bold); 
-    help.setColor(sf::Color::White);
 
-    _options[i]._text.setFont(font);
-    _options[i]._text.setPosition(100, 100 + 100*i);
-    _options[i]._text.setCharacterSize(35);                          
-    _options[i]._text.setStyle(sf::Text::Bold); 
-    if (_options[i].isSelected == true)
-      _options[i]._text.setColor(sf::Color::Red);
-    else
-      _options[i]._text.setColor(sf::Color::White);    
-  }    
+void Menu::trigger(const std::string& text)
+{
+  _isOpen = true;
+  changableText.setString(text);
 }
