@@ -63,6 +63,8 @@ class Game
   void draw();
   void update();
   void death();
+  void restart();
+
 
   private:
   sf::RenderWindow _window;

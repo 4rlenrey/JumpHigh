@@ -24,11 +24,13 @@ class Menu
     std::vector<Options> _options;
     bool _isOpen;
     sf::Text help;
+    sf::Text changableText;
 
     public:
     static sf::Font font;
     Menu();
-    void run();
+    void setup();
+    void trigger(const std::string& text);
     bool isOpen();
     void open(sf::RenderWindow&);
     void update(sf::RenderWindow&);

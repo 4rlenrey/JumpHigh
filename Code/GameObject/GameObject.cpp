@@ -21,6 +21,13 @@ GameObject::~GameObject()
     gameObjects.erase(std::remove(begin(gameObjects), end(gameObjects), this), end(gameObjects));
 }
 
+void GameObject::reset()
+{
+    _position = sf::Vector2f{};
+    _box.setPosition(_position);
+    _collisionInfo = collisionInfo{};
+}
+
 const sf::Vector2f& GameObject::getPosition() const
 {
     return _position;
