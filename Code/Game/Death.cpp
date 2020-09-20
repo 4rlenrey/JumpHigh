@@ -3,7 +3,6 @@
 
 void Game::death()
 {
-    std::cout << "Dead" << std::endl;
     //death screen here
     
 }

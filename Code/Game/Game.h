@@ -11,6 +11,7 @@
 #include "CameraController/CameraController.h"
 #include "Menu/Menu.h"
 #include "Score/Score.h"
+#include "Spikes/Spikes.h"
 
 class FpsCounter
 {
@@ -77,6 +78,7 @@ class Game
   CameraController _cameraController;
   World _world;
   Score _score;
+  Spikes _spikes;
 
   sf::Sprite background;
 
