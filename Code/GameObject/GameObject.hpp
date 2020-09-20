@@ -14,7 +14,8 @@ class GameObject : public sf::Drawable
 
     virtual ~GameObject();
 
-    virtual void update(float deltaTime = 0.0f); 
+    virtual void update(float deltaTime = 0.0f);
+    virtual void reset(); 
     virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
     void registerThisInStaticVector()

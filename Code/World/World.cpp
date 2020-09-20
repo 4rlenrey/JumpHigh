@@ -14,10 +14,6 @@ void World::generateWorld()
 
 void World::addPlatform()
 {
-    static int maxIndex = 1;
-    static int nextThreshold = 50;
-    static int prevThreshold = 50;
-    static int minIndex = 0;
 
     if(_platforms.size() > nextThreshold && maxIndex <= Platform::PLATFORM_DATABASE.size())
     {
@@ -40,7 +36,17 @@ void World::addPlatform()
     _platforms.push_back(Platform{pos,static_cast<int>(randVal*(2)) + minIndex});
 }
 
+void World::destroyWorld()
+{
+    _platforms.clear();
+    maxIndex = 1;
+    nextThreshold = 50;
+    prevThreshold = 50;
+    minIndex = 0;
+}
+
 std::vector<Platform>& World::getPlatforms()
 {
     return _platforms;
 }
+

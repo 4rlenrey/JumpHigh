@@ -92,11 +92,31 @@ void Game::update()
   FPS.work();
 }
 
+void Game::restart()
+{
+  _world.destroyWorld();
+  
+  _world.generateWorld();
+  for(auto& platform : _world.getPlatforms())
+  {
+    platform.registerThisInStaticVector();
+  }
+  _player.reset();
+  _cameraController.getView().setCenter(_windowSize.x/2.0f, _windowSize.y/2.0f);
+  _menu.trigger("Try again!");
+  
+}
+
 void Game::run()
 { 
   while (_window.isOpen())
   {
     pollEvents();
+
+    if(_player.getPosition().y > _cameraController.getView().getCenter().y + _windowSize.y/2.0f)
+    {
+      restart();
+    }
 
     update();
     if(_menu.isOpen())
@@ -106,7 +126,6 @@ void Game::run()
     }
     
     draw();
-    std::cout << _player.getPosition() << std::endl;
     Game::deltaTime();
   }
 }

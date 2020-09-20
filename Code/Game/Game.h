@@ -61,6 +61,7 @@ class Game
   void pollEvents();
   void draw();
   void update();
+  void restart();
 
 
   private:
