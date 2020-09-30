@@ -6,25 +6,35 @@
 sf::Font Score::font;
 
 
-Score::Score(GameObject& player, sf::View& viev)
-    : _playerS{player}, _viewS{viev}
+Score::Score(GameObject& player, sf::View& view)
+    : _player{player}, _view{view}
 {
     _score = 0;
-    text.setString("0");
-    text.setFont(font);
-    text.setPosition(100, 500);
-    text.setCharacterSize(35);                          
-    text.setStyle(sf::Text::Bold); 
-    text.setFillColor(sf::Color::White);
+    _text.setString("0");
+    _text.setFont(font);
+    _text.setPosition(100, 500);
+    _text.setCharacterSize(35);                          
+    _text.setStyle(sf::Text::Bold); 
+    _text.setFillColor(sf::Color::White);
+    _text.setPosition(10, _view.getCenter().y - 350);
 }
 
 void Score::update()
 {
-    s = "Score: ";
-    s.append(std::to_string(_score));
-    if (_score < -(_playerS.getPosition().y))
-       _score = -(_playerS.getPosition().y);
-    text.setString(s);
-    text.setPosition(10, _viewS.getCenter().y - 350);
+    if (_score < -(_player.getPosition().y))
+    {
+       _score = -(_player.getPosition().y);
+    }
 
+    _text.setString(SCORE + std::to_string(_score));
+}
+
+void Score::reset()
+{
+    _score = 0;
+}
+
+sf::Text& Score::getText()
+{
+    return _text;
 }

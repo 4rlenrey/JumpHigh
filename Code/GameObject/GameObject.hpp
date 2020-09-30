@@ -22,7 +22,13 @@ class GameObject : public sf::Drawable
     {
         gameObjects.push_back(this);
     }
-    
+
+    void registerThisInStaticVectorOnLayer(int layer)
+    {
+        gameObjects.push_back(this);
+        _layer = layer;
+    }
+
     void updateCollisionInfo(const collisionInfo& info = collisionInfo{});
     void resetCollisionInfo();
 
@@ -31,12 +37,17 @@ class GameObject : public sf::Drawable
     const sf::Sprite& getSprite() const;
 
     void setPosition(const sf::Vector2f& pos);
-    
+    int getLayer()
+    {
+        return _layer;
+    }
+
     protected:
     sf::Vector2f _position;
     sf::RectangleShape _box;
     sf::Sprite _sprite;
     collisionInfo _collisionInfo;
+    int _layer;
 
     private:
     virtual void updateBox();

@@ -1,5 +1,5 @@
 CC = g++
-LIBS = -lsfml-graphics -lsfml-window -lsfml-system -lm -lstdc++fs
+LIBS = -lsfml-graphics -lsfml-window -lsfml-system -lm -lstdc++fs -pthread -lX11 -std=c++17
 FLAGS = -g -Wall
 CODE_LOCATION = Code
 TESTS_LOCATION = Tests
@@ -22,7 +22,7 @@ compile:
 	$(CC) -g -c $(CPP) $(INCLUDES) $(FLAGS) $<
 
 main: $(CPP)
-	$(CC) -g $(CPP) $(LIBS) $(INCLUDES) -pthread -std=c++17 -o JumpHigh
+	$(CC) -g $(CPP) $(LIBS) $(INCLUDES) -o JumpHigh
 	make clean
 
 input:

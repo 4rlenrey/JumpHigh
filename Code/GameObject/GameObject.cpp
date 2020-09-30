@@ -5,13 +5,13 @@
 std::vector<GameObject*> GameObject::gameObjects = {};
 
 GameObject::GameObject()
-    : _box{sf::RectangleShape{sf::Vector2f{10,10}}}
+    : _box{sf::RectangleShape{sf::Vector2f{10,10}}}, _layer{0}
 {
     //gameObjects.push_back(this);
 }
 
 GameObject::GameObject(const sf::Vector2f& pos, const sf::Vector2f& boxSize)
-    : _position{pos}, _box{sf::RectangleShape{boxSize}}
+    : _position{pos}, _box{sf::RectangleShape{boxSize}}, _layer{0}
 {
     //gameObjects.push_back(this);
 }

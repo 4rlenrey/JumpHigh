@@ -5,18 +5,24 @@
 #include "GameObject/GameObject.hpp"
 #include <string>
 
-class Score
+class Score : public GameObject
 {
     public:
+    static sf::Font font;
+
     Score(GameObject& player, sf::View& viev);
 
     void update();
-    std::string s;
-    static sf::Font font;
+    void reset();
+
+    sf::Text& getText();
+
+    private:
+    const std::string SCORE = "Score:";
     long long _score;
-    sf::Text text;
-    GameObject& _playerS;
-    sf::View& _viewS;
+    sf::Text _text;
+    GameObject& _player;
+    sf::View& _view;
 
 };
 

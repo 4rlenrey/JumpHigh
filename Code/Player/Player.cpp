@@ -219,4 +219,6 @@ void Player::reset()
     _position = sf::Vector2f{600.0f, 500.0f};
     _box.setPosition(_position);
     _collisionInfo = collisionInfo{};
+    _acceleration = sf::Vector2f{};
+    _velocity = sf::Vector2f{};
 }

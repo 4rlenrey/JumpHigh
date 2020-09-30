@@ -93,7 +93,7 @@ bool Menu::isOpen()
 
 void Menu::open(sf::RenderWindow& window)
 {
-  while (_isOpen)
+  while (_isOpen && window.isOpen())
   {
     update(window);
     window.clear();

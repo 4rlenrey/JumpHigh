@@ -15,14 +15,9 @@ class Animation
     Animation() = default;
     Animation(const filesystem::path& path);
 
-    // void animate(sf::Sprite&, bool shouldStopOnLastFrame = false);
-
     void loadImages(const filesystem::path& path);
-    // sf::Texture& getCurrentTexture();
     std::vector<sf::Texture>& getImages();
     std::string& getName();
-    
-    // Animation& operator=(const Animation&);
 
     private:
     std::string _name;

@@ -5,19 +5,25 @@ sf::Texture Spikes::spikesTexture;
 
 Spikes::Spikes()
 {
-    position = sf::Vector2f{0.0f, 700.0f};
+    _position = sf::Vector2f{0.0f, 700.0f};
     _sprite.setTexture(spikesTexture);
-    _sprite.setPosition(position);
+    _sprite.setPosition(_position);
     _sprite.setScale(5,5);
 }
 
 void Spikes::update(float deltaTime)
 {
-    _sprite.move(sf::Vector2f{0.0f, -150*deltaTime});
+    _position.y -= 100 * deltaTime;
+    _sprite.setPosition(_position);
 }
 
 void Spikes::reset()
 {
-    position = sf::Vector2f{0.0f, 700.0f};
-    _sprite.setPosition(position);
+    _position = sf::Vector2f{0.0f, 700.0f};
+    _sprite.setPosition(_position);
+}
+
+sf::Sprite& Spikes::getSprite()
+{
+    return _sprite;
 }

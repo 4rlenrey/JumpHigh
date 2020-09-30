@@ -12,62 +12,44 @@
 #include "Menu/Menu.h"
 #include "Score/Score.h"
 #include "Spikes/Spikes.h"
-
-class FpsCounter
-{
-  public:
-  
-  void work()
-  {
-    count();
-    print();
-  }
-  
-  private:
-  void print()
-  {
-    if(_frameCount == 200)
-    {
-      std::cout << "FPS: " << _frameCount/_timer.getElapsedTime().asSeconds() << std::endl;
-      _timer.restart();
-      _frameCount = 0;
-    }
-  }
-
-  void count()
-  {
-    ++_frameCount;
-  }
-
-  int _frameCount = 0;
-  sf::Clock _timer;
-};
+#include "Game/FpsCounter.hpp"
 
 class Game
 {
   public:
   static const std::string TITLE;
   static const sf::Vector2u DEFAULT_WINDOW_SIZE;
+  static const float DEATH_TIME;
 
-  static sf::Texture BACKGROUND_TXT;
-
-  static sf::Clock _timer;
-  static float _deltaTime;
-  static void deltaTime();
-
+  static sf::Texture backgroundTexture;
+  static sf::Texture deathTexture;
+  
+  static sf::Clock timer;
+  static float deltaTime;
+  static void updateDeltaTime();
+  static void restartTimer()
+  {
+    timer.restart();
+  }
 
   Game(std::string title = TITLE, sf::Vector2u windowSize = DEFAULT_WINDOW_SIZE);
 
   void start();
   void run();
   void pollEvents();
-  void draw();
-  void update();
-  void death();
   void restart();
+  void update();
+  void draw();
+  void showDeathScreen();
 
 
   private:
+
+  bool windowIsOpen();
+  bool menuIsOpen();
+  bool playerLost();
+  void openMenu();
+
   sf::RenderWindow _window;
   std::string _title;
   sf::Vector2u _windowSize;
@@ -80,9 +62,9 @@ class Game
   Score _score;
   Spikes _spikes;
 
-  sf::Sprite background;
+  sf::Sprite _background;
 
-  FpsCounter FPS;
+  FpsCounter _fpsCounter;
 };
 
 #endif

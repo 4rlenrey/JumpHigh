@@ -4,16 +4,16 @@
 #include <SFML/Graphics.hpp>
 #include "GameObject/GameObject.hpp"
 
-class Spikes
+class Spikes : public GameObject
 {
-    public: 
+    public:
+    static sf::Texture spikesTexture;
     Spikes();
+
     void update(float);
     void reset();
-    sf::Vector2f position;
-    static sf::Texture spikesTexture;
-    sf::Sprite _sprite;
-
+    
+    sf::Sprite& getSprite();
 };
 
 #endif

@@ -8,7 +8,7 @@ void AnimationSystem::loadAnimations(const std::filesystem::path& path)
 {
     for(const std::filesystem::directory_entry& entry : std::filesystem::directory_iterator(path))
     {
-        ANIMATION_DATABASE.push_back(Animation{entry.path()});
+        ANIMATION_DATABASE.push_back(Animation{entry.path()}); //Animation constructor loads all pictures from folder given in path
     }
 }
 
