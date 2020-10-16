@@ -6,8 +6,7 @@
 #include <thread>
 
 int main()
-{
-
+{s
     srand(time(nullptr));
     AnimationSystem::loadAnimations("./resources/Animations/");
     Platform::loadTextures("./resources/Textures/Platforms/");
