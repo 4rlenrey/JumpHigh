@@ -6,17 +6,16 @@
 
 class CameraController
 {
-    public:
-    CameraController(GameObject& objToFollow);
+public:
+    CameraController(GameObject &objToFollow);
     void update(float deltaTime);
-    void reset(const sf::Vector2f& pos);
-    
-    sf::View& getView();
+    void reset(const sf::Vector2f &pos);
 
-    private:
-    GameObject* _obj;
+    sf::View &getView();
+
+private:
+    GameObject *_obj;
     sf::View _view;
-
 };
 
 #endif

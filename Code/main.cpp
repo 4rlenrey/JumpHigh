@@ -7,7 +7,7 @@
 
 int main()
 {
-    
+
     srand(time(nullptr));
     AnimationSystem::loadAnimations("./resources/Animations/");
     Platform::loadTextures("./resources/Textures/Platforms/");
@@ -17,6 +17,6 @@ int main()
     Game::deathTexture.loadFromFile("./resources/Textures/DeathScreen/gameOver.png");
 
     Game game{};
-    
+
     game.run();
 }

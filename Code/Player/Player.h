@@ -7,7 +7,7 @@
 
 class Player : public Physical
 {
-    public:
+public:
     static const float MAX_VELOCITY;
     static const float RECTANGLE_SIZE; //We can get rid of it later when collision system is finnished
     static const float JUMP_VELOCITY;
@@ -15,18 +15,17 @@ class Player : public Physical
 
     Player();
 
-    virtual void applyForce(const sf::Vector2f&) override;
+    virtual void applyForce(const sf::Vector2f &) override;
     virtual void reset() override;
-    
+
     void update(float deltaTime = 0.0f) override;
     void jump();
 
-    private:
+private:
     void updateVelocity(float deltaTime) override;
     void updateBox() override;
     void updateSprite() override;
 
-    
     void applyCollisionForces();
     void animationSelectionBasedOnState();
     void reactToInput();

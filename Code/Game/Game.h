@@ -16,14 +16,14 @@
 
 class Game
 {
-  public:
+public:
   static const std::string TITLE;
   static const sf::Vector2u DEFAULT_WINDOW_SIZE;
   static const float DEATH_TIME;
 
   static sf::Texture backgroundTexture;
   static sf::Texture deathTexture;
-  
+
   static sf::Clock timer;
   static float deltaTime;
   static void updateDeltaTime();
@@ -42,9 +42,7 @@ class Game
   void draw();
   void showDeathScreen();
 
-
-  private:
-
+private:
   bool windowIsOpen();
   bool menuIsOpen();
   bool playerLost();

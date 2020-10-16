@@ -6,19 +6,23 @@
 #include <vector>
 #include <string>
 
-enum Option {Play, Exit};
-
-class Options 
+enum Option
 {
-    public:
+    Play,
+    Exit
+};
+
+class Options
+{
+public:
     Options(Option);
     sf::Text _text;
     Option _option;
     bool isSelected;
 };
 
-class Menu  
-{   
+class Menu
+{
     void changeColorWhenSelected();
     int select;
     std::vector<Options> _options;
@@ -26,15 +30,15 @@ class Menu
     sf::Text help;
     sf::Text changableText;
 
-    public:
+public:
     static sf::Font font;
     Menu();
     void setup();
-    void trigger(const std::string& text);
+    void trigger(const std::string &text);
     bool isOpen();
-    void open(sf::RenderWindow&);
-    void update(sf::RenderWindow&);
-    std::vector<Options>& getOptions();
+    void open(sf::RenderWindow &);
+    void update(sf::RenderWindow &);
+    std::vector<Options> &getOptions();
     void checkInput();
 };
 

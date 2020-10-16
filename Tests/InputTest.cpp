@@ -7,7 +7,7 @@ int main()
 {
     sf::RenderWindow window{sf::VideoMode{100, 100}, "title"};
 
-    while(!Input::Escape.isPressed())
+    while (!Input::Escape.isPressed())
     {
         Input::update();
         std::cout << "W isPressed     = " << Input::W.isPressed() << std::endl;

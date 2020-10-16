@@ -5,11 +5,11 @@
 
 class GameObject; //forward declaration... basically bad code structure but lets just ommit it for now...
 
-struct hitbox 
+struct hitbox
 {
-  hitbox(const GameObject& obj);
-  const sf::Vector2f& _position;
-  const sf::Vector2f& _size;
+  hitbox(const GameObject &obj);
+  const sf::Vector2f &_position;
+  const sf::Vector2f &_size;
   float left;
   float right;
   float top;
@@ -18,11 +18,11 @@ struct hitbox
 
 struct collisionInfo
 {
-  bool left   = false;
-  bool right  = false;
-  bool top    = false;
+  bool left = false;
+  bool right = false;
+  bool top = false;
   bool bottom = false;
-  std::vector<GameObject*> collided;
+  std::vector<GameObject *> collided;
 
   void setLeft();
   void setRight();
@@ -30,20 +30,19 @@ struct collisionInfo
   void setBottom();
   void setMirroredInfo();
 
-  bool operator!=(const collisionInfo& test)
+  bool operator!=(const collisionInfo &test)
   {
-    if(left != test.left || right != test.right || top != test.top || bottom != test.bottom)
+    if (left != test.left || right != test.right || top != test.top || bottom != test.bottom)
     {
       return true;
     }
     return false;
   }
-
 };
 
-void drawHitbox(sf::RenderTarget& window,GameObject& obj);
-bool checkCollision(GameObject& Obj1, GameObject& Obj2);
-void checkAllCollisions(const GameObject&);
+void drawHitbox(sf::RenderTarget &window, GameObject &obj);
+bool checkCollision(GameObject &Obj1, GameObject &Obj2);
+void checkAllCollisions(const GameObject &);
 void resetAllCollisions();
 
 #endif

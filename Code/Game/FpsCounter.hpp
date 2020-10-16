@@ -5,12 +5,10 @@
 
 class FpsCounter
 {
-  public:
-  
+public:
   void work();
-  
-  private:
 
+private:
   void print();
   void count();
 

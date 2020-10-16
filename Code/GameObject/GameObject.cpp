@@ -2,15 +2,15 @@
 #include <algorithm>
 #include <iostream>
 
-std::vector<GameObject*> GameObject::gameObjects = {};
+std::vector<GameObject *> GameObject::gameObjects = {};
 
 GameObject::GameObject()
-    : _box{sf::RectangleShape{sf::Vector2f{10,10}}}, _layer{0}
+    : _box{sf::RectangleShape{sf::Vector2f{10, 10}}}, _layer{0}
 {
     //gameObjects.push_back(this);
 }
 
-GameObject::GameObject(const sf::Vector2f& pos, const sf::Vector2f& boxSize)
+GameObject::GameObject(const sf::Vector2f &pos, const sf::Vector2f &boxSize)
     : _position{pos}, _box{sf::RectangleShape{boxSize}}, _layer{0}
 {
     //gameObjects.push_back(this);
@@ -28,17 +28,17 @@ void GameObject::reset()
     _collisionInfo = collisionInfo{};
 }
 
-const sf::Vector2f& GameObject::getPosition() const
+const sf::Vector2f &GameObject::getPosition() const
 {
     return _position;
 }
 
-const sf::RectangleShape& GameObject::getRectangleShape() const
+const sf::RectangleShape &GameObject::getRectangleShape() const
 {
     return _box;
 }
 
-const sf::Sprite& GameObject::getSprite() const
+const sf::Sprite &GameObject::getSprite() const
 {
     return _sprite;
 }
@@ -49,7 +49,7 @@ void GameObject::update(float deltaTime)
     updateSprite();
 }
 
-void GameObject::draw(sf::RenderTarget& window, sf::RenderStates states) const
+void GameObject::draw(sf::RenderTarget &window, sf::RenderStates states) const
 {
     window.draw(_sprite);
 }
@@ -64,33 +64,32 @@ void GameObject::updateBox()
     _box.setPosition(_position);
 }
 
-void GameObject::updateCollisionInfo(const collisionInfo& info)
+void GameObject::updateCollisionInfo(const collisionInfo &info)
 {
-    for(auto objPtr : info.collided)
+    for (auto objPtr : info.collided)
     {
         _collisionInfo.collided.push_back(objPtr);
     }
 
-    if(!_collisionInfo.left && info.left)
+    if (!_collisionInfo.left && info.left)
     {
         _collisionInfo.left = true;
     }
-    
-    if(!_collisionInfo.right && info.right)
+
+    if (!_collisionInfo.right && info.right)
     {
         _collisionInfo.right = true;
     }
-    
-    if(!_collisionInfo.top && info.top)
+
+    if (!_collisionInfo.top && info.top)
     {
         _collisionInfo.top = true;
     }
-    
-    if(!_collisionInfo.bottom && info.bottom)
+
+    if (!_collisionInfo.bottom && info.bottom)
     {
         _collisionInfo.bottom = true;
     }
-
 }
 
 void GameObject::resetCollisionInfo()
@@ -99,7 +98,7 @@ void GameObject::resetCollisionInfo()
     _collisionInfo = collisionInfo{};
 }
 
-void GameObject::setPosition(const sf::Vector2f& pos)
+void GameObject::setPosition(const sf::Vector2f &pos)
 {
     _position = pos;
 }

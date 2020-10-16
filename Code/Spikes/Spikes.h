@@ -6,14 +6,14 @@
 
 class Spikes : public GameObject
 {
-    public:
+public:
     static sf::Texture spikesTexture;
     Spikes();
 
     void update(float);
     void reset();
-    
-    sf::Sprite& getSprite();
+
+    sf::Sprite &getSprite();
 };
 
 #endif

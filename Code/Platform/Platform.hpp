@@ -8,18 +8,17 @@
 
 class Platform : public GameObject
 {
-    public: 
+public:
     static std::vector<sf::Texture> PLATFORM_DATABASE;
-    static void loadTextures(const std::string&);
+    static void loadTextures(const std::string &);
 
     Platform() = default;
-    Platform(const sf::Vector2f&, int index = 0);
-    Platform(const sf::Vector2f&, const sf::Vector2f&);
+    Platform(const sf::Vector2f &, int index = 0);
+    Platform(const sf::Vector2f &, const sf::Vector2f &);
 
-    private:
+private:
     virtual void updateBox() override;
     int _index;
 };
-
 
 #endif

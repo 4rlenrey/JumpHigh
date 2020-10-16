@@ -4,9 +4,9 @@
 
 void World::generateWorld()
 {
-    _platforms.push_back(Platform{sf::Vector2f{0.0f, 600.0f}, sf::Vector2f{1200,30}});
-    
-    for(int i = 0; i < 400; i++)
+    _platforms.push_back(Platform{sf::Vector2f{0.0f, 600.0f}, sf::Vector2f{1200, 30}});
+
+    for (int i = 0; i < 400; i++)
     {
         addPlatform();
     }
@@ -15,25 +15,24 @@ void World::generateWorld()
 void World::addPlatform()
 {
 
-    if(_platforms.size() > nextThreshold && maxIndex <= Platform::PLATFORM_DATABASE.size())
+    if (_platforms.size() > nextThreshold && maxIndex <= Platform::PLATFORM_DATABASE.size())
     {
         maxIndex++;
         nextThreshold += 50;
     }
-    if(_platforms.size() > prevThreshold+25 && minIndex <= Platform::PLATFORM_DATABASE.size())
+    if (_platforms.size() > prevThreshold + 25 && minIndex <= Platform::PLATFORM_DATABASE.size())
     {
         prevThreshold = nextThreshold;
-        minIndex+=2;
+        minIndex += 2;
     }
 
-    float randVal = static_cast<float>(random())/RAND_MAX;
+    float randVal = static_cast<float>(random()) / RAND_MAX;
     float x = 200 + randVal * 800;
-    float y = (10 - static_cast<float>(_platforms.size())) * _platformDistance + randVal * 40; 
-    sf::Vector2f pos{x,y};
+    float y = (10 - static_cast<float>(_platforms.size())) * _platformDistance + randVal * 40;
+    sf::Vector2f pos{x, y};
 
-
-    randVal = static_cast<float>(random())/RAND_MAX;
-    _platforms.push_back(Platform{pos,static_cast<int>(randVal*(2)) + minIndex});
+    randVal = static_cast<float>(random()) / RAND_MAX;
+    _platforms.push_back(Platform{pos, static_cast<int>(randVal * (2)) + minIndex});
 }
 
 void World::destroyWorld()
@@ -45,8 +44,7 @@ void World::destroyWorld()
     minIndex = 0;
 }
 
-std::vector<Platform>& World::getPlatforms()
+std::vector<Platform> &World::getPlatforms()
 {
     return _platforms;
 }
-

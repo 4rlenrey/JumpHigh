@@ -5,13 +5,12 @@
 sf::Font Menu::font;
 
 Options::Options(const Option option)
-  : _option{option}, isSelected{false}
+    : _option{option}, isSelected{false}
 {
-
 }
 
 Menu::Menu()
-  : select{0}, _isOpen{true}
+    : select{0}, _isOpen{true}
 {
   setup();
 }
@@ -29,57 +28,56 @@ void Menu::setup()
   changableText.setCharacterSize(30);
   changableText.setFillColor(sf::Color::Blue);
 
-  for(int i = 0; i < _options.size(); i++)
+  for (int i = 0; i < _options.size(); i++)
   {
     help.setString("Press space to confirm");
     help.setFont(font);
     help.setPosition(100, 500);
-    help.setCharacterSize(50);                          
-    help.setStyle(sf::Text::Bold); 
+    help.setCharacterSize(50);
+    help.setStyle(sf::Text::Bold);
     help.setFillColor(sf::Color::White);
 
-
     _options[i]._text.setFont(font);
-    _options[i]._text.setPosition(100, 100 + 100*i);
-    _options[i]._text.setCharacterSize(50);                          
-    _options[i]._text.setStyle(sf::Text::Bold); 
+    _options[i]._text.setPosition(100, 100 + 100 * i);
+    _options[i]._text.setCharacterSize(50);
+    _options[i]._text.setStyle(sf::Text::Bold);
     if (_options[i].isSelected == true)
       _options[i]._text.setFillColor(sf::Color::Red);
     else
-      _options[i]._text.setFillColor(sf::Color::White);    
-  }    
+      _options[i]._text.setFillColor(sf::Color::White);
+  }
 }
 
 void Menu::checkInput()
 {
-  if(Input::Escape.justPressed())
+  if (Input::Escape.justPressed())
   {
     _isOpen = true;
   }
-  if(_isOpen == true)
+  if (_isOpen == true)
   {
-    if(Input::W.justPressed())
+    if (Input::W.justPressed())
     {
-        if(select > 0)
-        {
-          _options[select].isSelected = false;
-          select--; 
-          _options[select].isSelected = true;
-        }
+      if (select > 0)
+      {
+        _options[select].isSelected = false;
+        select--;
+        _options[select].isSelected = true;
+      }
     }
-    if(Input::S.justPressed())
+    if (Input::S.justPressed())
     {
 
-        if(select < _options.size()-1)
-        {
-          _options[select].isSelected = false;
-          select++;  
-          _options[select].isSelected = true;
-        }
+      if (select < _options.size() - 1)
+      {
+        _options[select].isSelected = false;
+        select++;
+        _options[select].isSelected = true;
+      }
     }
-    if(Input::Space.justPressed() && select == 0)
+    if (Input::Space.justPressed() && select == 0)
       _isOpen = false;
-    if(Input::Space.justPressed() && select == 1)
+    if (Input::Space.justPressed() && select == 1)
     {
       exit(1);
     }
@@ -88,23 +86,23 @@ void Menu::checkInput()
 
 bool Menu::isOpen()
 {
-  return _isOpen; 
+  return _isOpen;
 }
 
-void Menu::open(sf::RenderWindow& window)
+void Menu::open(sf::RenderWindow &window)
 {
   while (_isOpen && window.isOpen())
   {
     update(window);
     window.clear();
-    for(Options& option : _options)
-    window.draw(option._text);
+    for (Options &option : _options)
+      window.draw(option._text);
     window.draw(help);
     window.draw(changableText);
     window.display();
   }
 }
-void Menu::update(sf::RenderWindow& window)
+void Menu::update(sf::RenderWindow &window)
 {
   sf::Event _event;
   Input::update();
@@ -122,22 +120,22 @@ void Menu::update(sf::RenderWindow& window)
 
 void Menu::changeColorWhenSelected()
 {
- for(Options& option : _options)
+  for (Options &option : _options)
   {
     if (option.isSelected == true)
       option._text.setFillColor(sf::Color::Red);
     else
-      option._text.setFillColor(sf::Color::White);   
-  } 
+      option._text.setFillColor(sf::Color::White);
+  }
   //std::cout << select << std::endl;
 }
 
-std::vector<Options>& Menu::getOptions()
+std::vector<Options> &Menu::getOptions()
 {
   return _options;
 }
 
-void Menu::trigger(const std::string& text)
+void Menu::trigger(const std::string &text)
 {
   _isOpen = true;
   changableText.setString(text);

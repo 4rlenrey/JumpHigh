@@ -10,19 +10,17 @@ using namespace std;
 
 class Animation
 {
-    public:
- 
+public:
     Animation() = default;
-    Animation(const filesystem::path& path);
+    Animation(const filesystem::path &path);
 
-    void loadImages(const filesystem::path& path);
-    std::vector<sf::Texture>& getImages();
-    std::string& getName();
+    void loadImages(const filesystem::path &path);
+    std::vector<sf::Texture> &getImages();
+    std::string &getName();
 
-    private:
+private:
     std::string _name;
     std::vector<sf::Texture> _images;
-
 };
 
 #endif

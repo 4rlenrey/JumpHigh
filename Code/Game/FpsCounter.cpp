@@ -9,9 +9,9 @@ void FpsCounter::work()
 
 void FpsCounter::print()
 {
-    if(_frameCount == 200)
+    if (_frameCount == 200)
     {
-        std::cout << "FPS: " << _frameCount/_timer.getElapsedTime().asSeconds() << std::endl;
+        std::cout << "FPS: " << _frameCount / _timer.getElapsedTime().asSeconds() << std::endl;
         _timer.restart();
         _frameCount = 0;
     }

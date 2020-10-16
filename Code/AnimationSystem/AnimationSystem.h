@@ -7,23 +7,21 @@
 
 class AnimationSystem
 {
-    public:
-
+public:
     static std::vector<Animation> ANIMATION_DATABASE;
     static const int FRAME_DURATION;
-    static void loadAnimations(const std::filesystem::path& path);
+    static void loadAnimations(const std::filesystem::path &path);
 
     AnimationSystem();
 
-    void selectAnimation(const std::string& name);
-    void animate(sf::Sprite& sprite, bool shouldStopOnLastFrame = false);
-    Animation* getAnimation();
+    void selectAnimation(const std::string &name);
+    void animate(sf::Sprite &sprite, bool shouldStopOnLastFrame = false);
+    Animation *getAnimation();
 
-    private:
-    Animation* _currentAnimation = nullptr;
+private:
+    Animation *_currentAnimation = nullptr;
     int index = 0;
     sf::Clock _timer;
-
 };
 
 #endif

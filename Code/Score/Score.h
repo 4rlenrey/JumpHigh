@@ -7,23 +7,23 @@
 
 class Score : public GameObject
 {
-    public:
+public:
     static sf::Font font;
 
-    Score(GameObject& player, sf::View& viev);
+    Score(GameObject &player, sf::View &viev);
 
     void update();
     void reset();
+    virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 
-    sf::Text& getText();
+    sf::Text &getText();
 
-    private:
+private:
     const std::string SCORE = "Score:";
     long long _score;
     sf::Text _text;
-    GameObject& _player;
-    sf::View& _view;
-
+    GameObject &_player;
+    sf::View &_view;
 };
 
 #endif

@@ -10,7 +10,7 @@ struct ButtonStates
     bool justReleased();
     void operator=(bool val);
 
-    private:
+private:
     bool _currentState = 0;
     bool _previousState = 0;
     bool _justPressed = 0;
@@ -21,16 +21,15 @@ struct ButtonStates
 
 class Input
 {
-    public:
+public:
     static ButtonStates W;
     static ButtonStates A;
     static ButtonStates S;
     static ButtonStates D;
     static ButtonStates Space;
     static ButtonStates Escape;
-    
+
     static void update();
 };
-
 
 #endif

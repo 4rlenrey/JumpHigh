@@ -7,16 +7,16 @@
 
 class GameObject : public sf::Drawable
 {
-    public:
-    static std::vector<GameObject*> gameObjects;
+public:
+    static std::vector<GameObject *> gameObjects;
     GameObject();
-    GameObject(const sf::Vector2f&, const sf::Vector2f& boxSize = sf::Vector2f{});
+    GameObject(const sf::Vector2f &, const sf::Vector2f &boxSize = sf::Vector2f{});
 
     virtual ~GameObject();
 
     virtual void update(float deltaTime = 0.0f);
-    virtual void reset(); 
-    virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+    virtual void reset();
+    virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
 
     void registerThisInStaticVector()
     {
@@ -29,30 +29,29 @@ class GameObject : public sf::Drawable
         _layer = layer;
     }
 
-    void updateCollisionInfo(const collisionInfo& info = collisionInfo{});
+    void updateCollisionInfo(const collisionInfo &info = collisionInfo{});
     void resetCollisionInfo();
 
-    const sf::Vector2f& getPosition() const;
-    const sf::RectangleShape& getRectangleShape() const;
-    const sf::Sprite& getSprite() const;
+    const sf::Vector2f &getPosition() const;
+    const sf::RectangleShape &getRectangleShape() const;
+    const sf::Sprite &getSprite() const;
 
-    void setPosition(const sf::Vector2f& pos);
+    void setPosition(const sf::Vector2f &pos);
     int getLayer()
     {
         return _layer;
     }
 
-    protected:
+protected:
     sf::Vector2f _position;
     sf::RectangleShape _box;
     sf::Sprite _sprite;
     collisionInfo _collisionInfo;
     int _layer;
 
-    private:
+private:
     virtual void updateBox();
     virtual void updateSprite();
-    
 };
 
 #endif

@@ -8,7 +8,7 @@ Spikes::Spikes()
     _position = sf::Vector2f{0.0f, 700.0f};
     _sprite.setTexture(spikesTexture);
     _sprite.setPosition(_position);
-    _sprite.setScale(5,5);
+    _sprite.setScale(5, 5);
 }
 
 void Spikes::update(float deltaTime)
@@ -23,7 +23,7 @@ void Spikes::reset()
     _sprite.setPosition(_position);
 }
 
-sf::Sprite& Spikes::getSprite()
+sf::Sprite &Spikes::getSprite()
 {
     return _sprite;
 }
