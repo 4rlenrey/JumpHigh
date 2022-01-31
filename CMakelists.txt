@@ -11,13 +11,13 @@ DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/Debug)
 
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/external/SFML-2.5.1/bin/
 DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/Release)
+endif()
 
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/resources
 DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/Debug)
 
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/resources
 DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/Release)
-endif()
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/external/SFML-2.5.1/include/)
 target_link_libraries(${PROJECT_NAME} sfml-graphics sfml-system sfml-window )
