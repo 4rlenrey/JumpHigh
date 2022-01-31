@@ -26,13 +26,13 @@ void World::addPlatform()
         minIndex+=2;
     }
 
-    float randVal = static_cast<float>(random())/RAND_MAX;
+    float randVal = static_cast<float>(std::rand())/RAND_MAX;
     float x = 200 + randVal * 800;
     float y = (10 - static_cast<float>(_platforms.size())) * _platformDistance + randVal * 40; 
     sf::Vector2f pos{x,y};
 
 
-    randVal = static_cast<float>(random())/RAND_MAX;
+    randVal = static_cast<float>(std::rand())/RAND_MAX;
     _platforms.push_back(Platform{pos,static_cast<int>(randVal*(2)) + minIndex});
 }
 

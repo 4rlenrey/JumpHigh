@@ -17,7 +17,7 @@ std::string searchForNumbers(const std::string& filename)
 }
 
 Animation::Animation(const filesystem::path& path)
-    :_name{path.filename()}
+    :_name{path.filename().string()}
 {
     loadImages(path);
     // _it = std::begin(_images);
